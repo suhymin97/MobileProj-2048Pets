@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <array name="numColor">
+        <item>#EC4340</item>
+        <item>#74B5DD</item>
+        <item>#027DC0</item>
+        <item>#F9CA58</item>
+
+        <item>#F9D067</item>
+        <item>#F5E6CF</item>
+        <item>#FBB27D</item>
+        <item>#F14B61</item>
+        <item>#FE5C45</item>
+
+        <item>#FAE7E0</item>
+        <item>#027CC7</item>
+        <item>#F9C62D</item>
+        <item>#F5D077</item>
+    </array>
+
+</resources>

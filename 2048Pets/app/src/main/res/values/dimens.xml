@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="d_item">200dp</dimen>
+    <dimen name="d_grid">930dp</dimen>
+    <dimen name="d_over">700dp</dimen>
+    <dimen name="d_textDialog">30dp</dimen>
+    <dimen name="d_fbicon">120dp</dimen>
+    <dimen name="d_avaProfile">250dp</dimen>
+    <dimen name="d_textScore">50dp</dimen>
+    <dimen name="d_ctnScore">200dp</dimen>
+    <dimen name="d_txtScore">40dp</dimen>
+    <dimen name="d_marginFBtnPlay">20dp</dimen>
+    <dimen name="d_menuButton">290dp</dimen>
+    <dimen name="d_paddingMenuBtn">55dp</dimen>
+    <dimen name="d_achivement">85dp</dimen>
+    <dimen name="d_itemshop">250dp</dimen>
+    <dimen name="d_gold">60dp</dimen>
+    <dimen name="d_marginitemshop">20dp</dimen>
+    <dimen name="d_cardview">335dp</dimen>
+
+</resources>

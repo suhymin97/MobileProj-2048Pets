@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity"
+    android:orientation="horizontal">
+
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="dsa.hcmiu.a2048pets.profile_shop.FragmentProfile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

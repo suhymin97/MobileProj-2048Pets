@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">2048 Pets</string>
+
+    <array name="arrNo">
+        <item>no0</item>
+        <item>no2</item>
+        <item>no4</item>
+        <item>no8</item>
+        <item>no16</item>
+        <item>no32</item>
+        <item>no64</item>
+        <item>no128</item>
+        <item>no256</item>
+        <item>no512</item>
+        <item>no1024</item>
+        <item>no2048</item>
+        <item>no4096</item>
+        <item>no8192</item>
+    </array>
+
+    <array name="arrImage1">
+        <item>@raw/no0</item>
+        <item>@raw/no2_1</item>
+        <item>@raw/no4_1</item>
+        <item>@raw/no8_1</item>
+        <item>@raw/no16_1</item>
+        <item>@raw/no32_1</item>
+        <item>@raw/no64_1</item>
+        <item>@raw/no128_1</item>
+        <item>@raw/no256_1</item>
+        <item>@raw/no512</item>
+        <item>@raw/no1024</item>
+        <item>@raw/no2048</item>
+        <item>@raw/no4096</item>
+        <item>@raw/no8192</item>
+    </array>
+
+    <array name="arrImage2">
+        <item>@raw/no0</item>
+        <item>@raw/no2</item>
+        <item>@raw/no4</item>
+        <item>@raw/no8</item>
+        <item>@raw/no16</item>
+        <item>@raw/no32</item>
+        <item>@raw/no64</item>
+        <item>@raw/no128</item>
+        <item>@raw/no256</item>
+        <item>@raw/no512</item>
+        <item>@raw/no1024</item>
+        <item>@raw/no2048</item>
+        <item>@raw/no4096</item>
+        <item>@raw/no8192</item>
+    </array>
+
+    <string name="facebook_app_id">219749715275024</string>
+    <string name="fb_login_protocol_scheme">fb219749715275024</string>
+    <string name="default_name">Anonymous</string>
+    <string name="facebookin">SIGN IN WITH FACEBOOK</string>
+    <string name="facebookout">SIGN OUT OF FACEBOOK</string>
+
+</resources>

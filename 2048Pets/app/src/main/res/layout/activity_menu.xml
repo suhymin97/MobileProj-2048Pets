@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_background"
+    tools:context="dsa.hcmiu.a2048pets.MenuActivity">
+
+    <!-- FB BUTTON -->
+    <RelativeLayout
+        android:id="@+id/Profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivAvaFb"
+            android:layout_width="@dimen/d_fbicon"
+            android:layout_height="@dimen/d_fbicon"
+            android:layout_margin="20dp"
+            android:src="@drawable/fbicom"
+            app:civ_border_color="#fff"
+            app:civ_border_width="2dp" />
+        <Button
+            android:id="@+id/btnProfile"
+            android:layout_width="@dimen/d_fbicon"
+            android:layout_height="@dimen/d_fbicon"
+            android:layout_margin="20dp"
+            android:alpha="0" />
+        <TextView
+            android:id="@+id/tvTotalScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivAvaFb"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/comicbd"
+            android:textColor="#000"
+            android:textSize="@dimen/d_textScore" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/Spacce_Menu"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Spacce_Menu">
+
+        <!-- SOUND BUTTON -->
+        <ImageButton
+            android:id="@+id/btnSound"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/d_menuButton"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/cat_up"
+            android:background="@null"
+            android:scaleType="fitCenter"/>
+        <!-- PLAY BUTTON -->
+        <ImageButton
+            android:id="@+id/bMenuPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/b_play"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:onClick="playIT" />
+        <!-- other BUTTONs -->
+        <LinearLayout
+            android:id="@+id/layMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/d_paddingMenuBtn"
+            android:layout_marginEnd="93dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/bRule"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/b_how"
+                android:background="@null"
+                android:onClick="playIT"/>
+
+            <ImageButton
+                android:id="@+id/bStore"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_alignStart="@+id/layMenu"
+                android:layout_weight="1"
+                android:src="@drawable/b_store"
+                android:background="@null"
+                android:onClick="storeIT" />
+
+            <ImageButton
+                android:id="@+id/bQuit"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/b_quit"
+                android:background="@null"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- CUP of CATS -->
+    <ImageView
+        android:id="@+id/ivCupCatShadow"
+        android:layout_width="531dp"
+        android:layout_height="146dp"
+        android:layout_alignStart="@+id/ivCupCat"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginBottom="62dp"
+        android:src="@drawable/cupcatshadow" />
+    <ImageView
+        android:id="@+id/ivCupCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/Profile"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="5dp"
+        android:onClick="moewIT"
+        android:scaleType="fitCenter"
+        android:src="@drawable/cupcat" />
+    <ImageButton
+        android:id="@+id/btnAbout"
+        android:layout_width="@dimen/d_menuButton"
+        android:layout_height="@dimen/d_menuButton"
+        android:src="@drawable/b_about"
+        android:scaleType="fitXY"
+        android:background="@null"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

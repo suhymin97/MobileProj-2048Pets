@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/ivShopItem"
+            android:layout_width="@dimen/d_itemshop"
+            android:layout_height="@dimen/d_itemshop"
+            android:layout_marginRight="@dimen/d_textScore"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/poke"/>
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/d_textScore"
+            android:textColor="@color/black"
+            android:layout_toEndOf="@id/ivShopItem"
+            android:fontFamily="@font/comic"
+            android:text="$100"/>
+
+        <ImageButton
+            android:id="@+id/btnPurchase"
+            android:layout_width="500dp"
+            android:layout_height="50dp"
+            android:layout_alignStart="@id/tvPrice"
+            android:layout_below="@+id/tvPrice"
+            android:layout_alignBottom="@id/ivShopItem"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/purchase" />
+    </RelativeLayout>
+    -->
+
+    <android.support.v7.widget.CardView
+        android:layout_width="@dimen/d_cardview"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="13dp"
+        app:cardBackgroundColor="#EDEDED"
+        app:cardCornerRadius="14dp"
+        app:cardMaxElevation="2dp"
+        app:cardElevation="1dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/ivShopItem"
+                android:layout_width="@dimen/d_itemshop"
+                android:layout_height="@dimen/d_itemshop"
+                android:layout_marginTop="@dimen/d_textDialog"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/poke"/>
+            <TextView
+                android:layout_margin="10dp"
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/d_textScore"
+                android:textColor="@color/black"
+                android:layout_below="@id/ivShopItem"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/comic"
+                android:text="$100"
+                android:layout_marginBottom="5dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
