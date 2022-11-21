@@ -6,10 +6,7 @@ This is our Data Structure Algorithm project.
 
 ### Contributions
 
- - [Tu Anh](https://github.com/suhymin97/) is the maintainer for this repository, and main support for this project.
- - [Thanh Hien](https://github.com/thanhhien191097) design UI for whole game and support adapter for game
- - [Hai Nguyen](https://github.com/NguyenHoHai) added custom code for swipe handling on mobile, support handling play activity.
- - [Tuan Hung](https://github.com/Hiroyughi) support shop activity
+ - [Tu Anh](https://github.com/suhymin97/) 
 
 Many thanks to prof.Tran Thanh Tung for many useful advise.
 
@@ -23,7 +20,7 @@ I never reached 2048, so I just have this game over image :smile:
 
 ### Demo
 
-Watch the [youtube video](http://youtu.be/GBvmYQE_RLs)
+Watch the [youtube video](http://youtu.be/)
 
 ## Contributing
 Changes and improvements are more than welcome! Feel free to fork and open a pull request. Please make your changes in a specific branch and request to pull into `master`! If you can, please make sure the game fully works before sending the PR, as that will help speed up the process.
