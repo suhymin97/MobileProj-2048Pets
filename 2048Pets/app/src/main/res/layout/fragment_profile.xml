@@ -32,8 +32,8 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/d_profile_txtUsername"
                 android:text="@string/default_name"/>
-
-            <Button
+        <!-- Socialicons -->
+            <!--Button
                 android:id="@+id/btnLogin"
                 android:layout_width="@dimen/d_btnlogin_w"
                 android:layout_height="@dimen/d_btnlogin_h"
@@ -43,7 +43,34 @@
                 android:textSize="@dimen/d_profile_txtlogin"
                 android:background="@color/com_facebook_blue"
                 android:textColor="@android:color/white"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"/-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/socialicons"
+            android:layout_alignParentBottom="true"
+            android:gravity="center">
+
+
+            <ImageButton
+                android:layout_width="@dimen/d_btnlogin_h"
+                android:layout_height="@dimen/d_btnlogin_h"
+                android:layout_margin="@dimen/d_btnlogin_w"
+                android:src="@drawable/google"/>
+            <ImageButton
+                android:id="@+id/btnLogin"
+                android:layout_width="@dimen/d_btnlogin_h"
+                android:layout_height="@dimen/d_btnlogin_h"
+                android:layout_margin="@dimen/d_btnlogin_w"
+                android:src="@drawable/fb"/>
+            <ImageButton
+                android:layout_width="@dimen/d_btnlogin_h"
+                android:layout_height="@dimen/d_btnlogin_h"
+                android:layout_margin="@dimen/d_btnlogin_w"
+                android:src="@drawable/twitter"/>
+
+        </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ctn_textView"
                 android:layout_width="match_parent"

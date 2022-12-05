@@ -53,26 +53,26 @@
         android:paddingLeft="@dimen/d_cupcat_margin"
         android:paddingRight="@dimen/d_cupcat_margin">
 
+        <!-- PLAY BUTTON -->
+        <ImageButton
+            android:id="@+id/bMenuPlay"
+            android:layout_width="@dimen/d_button_w"
+            android:layout_height="@dimen/d_butplay_h"
+            android:layout_centerInParent="true"
+            android:background="@null"
+            android:onClick="playIT"
+            android:scaleType="fitCenter"
+            android:src="@drawable/b_play" />
+
         <!-- SOUND BUTTON -->
         <ImageButton
             android:id="@+id/btnSound"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/d_menuButton"
             android:layout_height="@dimen/d_menuButton"
             android:layout_centerHorizontal="true"
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/cat_up" />
-
-        <!-- PLAY BUTTON -->
-        <ImageButton
-            android:id="@+id/bMenuPlay"
-            android:layout_width="@dimen/d_button_w"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:background="@null"
-            android:onClick="playIT"
-            android:scaleType="fitCenter"
-            android:src="@drawable/b_play" />
 
         <!-- other BUTTONs -->
         <LinearLayout
