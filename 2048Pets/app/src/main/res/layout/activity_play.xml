@@ -8,48 +8,66 @@
     android:orientation="horizontal"
     tools:context="dsa.hcmiu.a2048pets.PlayActivity">
 
+    <GridView
+        android:id="@+id/gvMatrix"
+        android:layout_width="@dimen/d_grid"
+        android:layout_height="@dimen/d_grid"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/d_grid_mleft"
+        android:numColumns="4"
+        android:paddingBottom="5dp"
+        android:scrollbars="none"></GridView>
+
     <RelativeLayout
         android:id="@+id/ctnFunc"
-        android:layout_width="600dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/d_hscore_m"
+        android:layout_marginTop="@dimen/d_hscore_m"
+        android:layout_toRightOf="@+id/gvMatrix">
 
+        <!--Highscrore -->
         <LinearLayout
             android:id="@+id/tvContainer"
-            android:layout_width="450dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d_hscore_h"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_margin="40dp"
-            android:orientation="horizontal"
-            android:paddingTop="50dp">
+            android:layout_margin="@dimen/d_hscore_m"
+            android:paddingTop="@dimen/d_hscore_m"
+            android:paddingLeft="@dimen/d_hscore_m"
+            android:paddingRight="@dimen/d_hscore_m"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvScore"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="score"
                 android:fontFamily="@font/comic"
+                android:gravity="center"
+                android:paddingBottom="25dp"
+                android:text="score"
                 android:textColor="#000"
-                android:textSize="@dimen/d_txtScore"
-                android:paddingBottom="25dp"/>
+                android:textSize="@dimen/d_txtScore" />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tvNameHighscore"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="17dp"
+                    android:fontFamily="@font/comicbd"
                     android:gravity="center"
                     android:text="Highscore"
-                    android:fontFamily="@font/comicbd"
                     android:textColor="#000"
-                    android:textSize="30dp"/>
+                    android:textSize="@dimen/d_txtScore" />
 
                 <TextView
                     android:id="@+id/tvHighscore"
@@ -65,106 +83,103 @@
 
 
         </LinearLayout>
+
+        <!-- Function button -->
         <LinearLayout
             android:id="@+id/ctn_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvContainer"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/d_textScore">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnUndo"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/d_achivement"
-                android:textColor="@color/black"
-                android:textSize="@dimen/d_textDialog"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:background="@drawable/squircle_button"
                 android:fontFamily="@font/comic"
+                android:gravity="center"
                 android:text="Undo"
-                android:background="@drawable/squircle_button"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_textDialog" />
+
             <Button
                 android:id="@+id/btnHammer"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/d_achivement"
-                android:textColor="@color/black"
-                android:textSize="@dimen/d_textDialog"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:background="@drawable/squircle_button"
                 android:fontFamily="@font/comic"
+                android:gravity="center"
                 android:text="Hammer"
-                android:background="@drawable/squircle_button"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_textDialog" />
+
             <Button
                 android:id="@+id/btnNewGame"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/d_achivement"
-                android:textColor="@color/black"
-                android:textSize="@dimen/d_textDialog"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:background="@drawable/squircle_button"
                 android:fontFamily="@font/comic"
+                android:gravity="center"
                 android:text="Newgame"
-                android:background="@drawable/squircle_button"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_textDialog" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ctn_features"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ctn_textView"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tvUndo"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/d_achivement"
-                android:textColor="@color/black"
-                android:textSize="@dimen/d_textDialog"
-                android:gravity="center"
                 android:layout_weight="1"
                 android:fontFamily="@font/comic"
-                android:text="Undo"/>
+                android:gravity="center"
+                android:text="Undo"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_textDialog" />
+
             <TextView
                 android:id="@+id/tvHammer"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/d_achivement"
-                android:textColor="@color/black"
-                android:textSize="@dimen/d_textDialog"
-                android:gravity="center"
                 android:layout_weight="1"
                 android:fontFamily="@font/comic"
-                android:text="Key"/>
+                android:gravity="center"
+                android:text="Key"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_textDialog" />
 
             <Button
                 android:id="@+id/btnSoundPlay"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/d_achivement"
-                android:textColor="@color/black"
-                android:textSize="@dimen/d_textDialog"
-                android:gravity="center"
                 android:layout_weight="1"
+                android:background="@drawable/squircle_button"
                 android:fontFamily="@font/comic"
+                android:gravity="center"
                 android:text="Sound"
-                android:background="@drawable/squircle_button"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_textDialog" />
         </LinearLayout>
+
         <Button
             android:id="@+id/btnShopPA"
             android:layout_width="@dimen/d_fbicon"
             android:layout_height="@dimen/d_fbicon"
-            android:background="@drawable/shop_button"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shop_button" />
     </RelativeLayout>
 
-    <GridView
-        android:id="@+id/gvMatrix"
-        android:layout_width="@dimen/d_grid"
-        android:layout_height="@dimen/d_grid"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="320dp"
-        android:layout_marginTop="24dp"
-        android:numColumns="4"
-        android:paddingBottom="10dp"
-        android:scrollbars="none"></GridView>
+
 
 </RelativeLayout>

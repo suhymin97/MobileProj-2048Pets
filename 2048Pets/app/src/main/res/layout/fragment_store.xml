@@ -10,11 +10,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="100dp"
-        android:paddingLeft="100dp"
-        android:paddingTop="80dp"
-        android:paddingBottom="80dp"
+        android:paddingRight="@dimen/d_store_padv"
+        android:paddingLeft="@dimen/d_store_padv"
+        android:paddingTop="@dimen/d_store_padh"
+        android:paddingBottom="@dimen/d_store_padh"
         android:background="@drawable/squircle_store">
+
+        <!--Gold-->
         <TextView
             android:id="@+id/tvAchiveGold"
             android:layout_width="wrap_content"
@@ -31,48 +33,53 @@
             android:src="@drawable/gold"
             android:layout_margin="10dp"
             android:layout_toLeftOf="@+id/tvAchiveGold"/>
+
+        <!-- Selected item-->
         <RelativeLayout
             android:id="@+id/ctn_show"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="30dp"
+            android:layout_below="@+id/tvAchiveGold"
             android:orientation="horizontal"
-            android:layout_below="@+id/tvAchiveGold">
+            android:paddingBottom="30dp">
+
             <ImageView
                 android:id="@+id/ivShopItem"
                 android:layout_width="@dimen/d_itemshop"
                 android:layout_height="@dimen/d_itemshop"
-                android:layout_marginRight="@dimen/d_textScore"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/poke"/>
+                android:layout_marginRight="@dimen/d_textScore"
+                android:src="@drawable/poke" />
+
             <TextView
                 android:id="@+id/tvNameItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="60dp"
-                android:textColor="@color/black"
                 android:layout_toEndOf="@id/ivShopItem"
                 android:fontFamily="@font/comicbd"
-                android:text="Avatar Pokemon"/>
+                android:text="Avatar Pokemon"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_store_txtitem" />
+
             <TextView
                 android:id="@+id/tvPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/d_textScore"
-                android:textColor="@color/black"
-                android:layout_toEndOf="@id/ivShopItem"
                 android:layout_below="@+id/tvNameItem"
                 android:layout_alignBottom="@id/ivShopItem"
+                android:layout_toEndOf="@id/ivShopItem"
                 android:fontFamily="@font/comic"
-                android:text="$100"/>
+                android:text="$100"
+                android:textColor="@color/black"
+                android:textSize="@dimen/d_textScore" />
 
             <ImageButton
                 android:id="@+id/btnPurchase"
-                android:layout_width="500dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/d_store_btnpur_h"
+                android:layout_height="@dimen/d_store_btnpur_w"
                 android:layout_below="@+id/tvNameItem"
                 android:layout_alignBottom="@id/ivShopItem"
+                android:layout_alignParentRight="true"
                 android:background="@null"
                 android:scaleType="fitCenter"
                 android:src="@drawable/purchase" />
@@ -83,14 +90,14 @@
             android:layout_height="7dp"
             android:background="@color/gray"
             android:layout_below="@+id/ctn_show"/>
+
         <GridView
             android:id="@+id/lvShopping"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/ctn_space"
-            android:orientation="horizontal"
-            android:numColumns="3"
-            android:listSelector="@null">
-        </GridView>
+            android:listSelector="@null"
+            android:numColumns="4"
+            android:orientation="horizontal"></GridView>
     </RelativeLayout>
 </LinearLayout>
