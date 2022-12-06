@@ -1,6 +1,6 @@
 package dsa.hcmiu.a2048pets.profile_shop;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -34,6 +34,10 @@ public class FragmentShopping extends Fragment {
     ImageButton btnPurchase;
     ShopItem selectItem;
     SendData sendData;
+
+    public FragmentShopping() {
+        super(R.layout.fragment_store);
+    }
 
     @Nullable
     @Override

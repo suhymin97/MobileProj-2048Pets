@@ -52,10 +52,13 @@
         <item>@raw/no8192</item>
     </array>
 
-    <string name="facebook_app_id">219749715275024</string>
-    <string name="fb_login_protocol_scheme">fb219749715275024</string>
+    <string name="facebook_app_id">512590147274886</string>
+    <string name="fb_login_protocol_scheme">fb512590147274886</string>
+    <string name="facebook_client_token">b1e9af3c7880ec95a4390ddb8ef2fb70</string>
     <string name="default_name">Anonymous</string>
     <string name="facebookin">SIGN IN WITH FACEBOOK</string>
-    <string name="facebookout">SIGN OUT OF FACEBOOK</string>
+    <string name="signout">SIGN OUT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

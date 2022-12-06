@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ProfileActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:weightSum="10">
 
     <fragment
-        android:id="@+id/fragmentProfile"
+        android:id="@+id/fragmentProfileLand"
         android:name="dsa.hcmiu.a2048pets.profile_shop.FragmentProfile"
         android:layout_width="0dp"
         android:layout_height="match_parent"

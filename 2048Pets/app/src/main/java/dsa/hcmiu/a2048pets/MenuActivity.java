@@ -232,7 +232,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         TextView tvUndo = (TextView) MyDialog.findViewById(R.id.tvAchiveUndo);
         TextView tvHammer = (TextView) MyDialog.findViewById(R.id.tvAchiveHammer);
         final TextView tvNick = (TextView) MyDialog.findViewById(R.id.tvNick);
-        final Button btnLogin = (Button) MyDialog.findViewById(R.id.btnLogin);
+        final ImageButton btnLogin = (ImageButton) MyDialog.findViewById(R.id.btnLogin);
         final Button btnLogout = (Button) MyDialog.findViewById(R.id.btnLogout);
         CircleImageView ivAva = (CircleImageView) MyDialog.findViewById(R.id.ivAvaFb);
 

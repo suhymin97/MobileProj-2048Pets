@@ -11,7 +11,7 @@
     <dimen name="d_menuButton">100dp</dimen>
     <dimen name="d_paddingMenuBtn">17dp</dimen>
     <dimen name="d_achivement">21dp</dimen>
-    <dimen name="d_itemshop">62dp</dimen>
+    <dimen name="d_itemshop">77dp</dimen>
     <dimen name="d_gold">20dp</dimen>
     <dimen name="d_marginitemshop">5dp</dimen>
     <dimen name="d_cardview">83dp</dimen>
@@ -43,14 +43,15 @@
     <dimen name="d_profile_ava_mtop">20dp</dimen>
     <dimen name="d_profile_txtUsername">13dp</dimen>
     <dimen name="d_profile_txtlogin">7dp</dimen>
-    <dimen name="d_btnlogin_h">23dp</dimen>
-    <dimen name="d_btnlogin_w">17dp</dimen>
+    <dimen name="d_btnlogin_h">35dp</dimen>
+    <dimen name="d_btnlogin_w">13dp</dimen>
 
     <dimen name="d_store_padh">33dp</dimen>
     <dimen name="d_store_padv">39dp</dimen>
-    <dimen name="d_store_btnpur_h">166dp</dimen>
-    <dimen name="d_store_btnpur_w">17dp</dimen>
+    <dimen name="d_store_btnpur_w">166dp</dimen>
+    <dimen name="d_store_btnpur_m">90dp</dimen>
     <dimen name="d_store_txtitem">20dp</dimen>
+    <dimen name="d_store_txtprice">40dp</dimen>
 
 
 </resources>

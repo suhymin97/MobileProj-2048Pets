@@ -1,6 +1,6 @@
 package dsa.hcmiu.a2048pets.profile_shop;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.facebook.GraphResponse;
@@ -21,8 +22,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import dsa.hcmiu.a2048pets.R;
 import dsa.hcmiu.a2048pets.entities.handle.FbConnectHelper;
 import dsa.hcmiu.a2048pets.entities.handle.HandleImage;
-import dsa.hcmiu.a2048pets.entities.model.Features;
-import dsa.hcmiu.a2048pets.entities.model.User;
 
 import static dsa.hcmiu.a2048pets.entities.model.Features.user;
 
@@ -30,28 +29,35 @@ public class FragmentProfile extends Fragment implements FbConnectHelper.OnFbSig
 
     TextView tvHighscore, tvUndo, tvHammer;
     CircleImageView ivAva;
-    private Button btnlogin,btnlogout;
+    private ImageButton btnlogin;
+    private Button btnlogout;
     private TextView tvNick;
     private ProfileTracker mProfileTracker;
     private FbConnectHelper fbConnectHelper;
+
+    public FragmentProfile() {
+        super(R.layout.fragment_profile);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile,container,false);
+        fbConnectHelper = new FbConnectHelper(this,this);
         tvHighscore = (TextView) view.findViewById(R.id.tvAchiveHighscore);
         tvUndo = (TextView) view.findViewById(R.id.tvAchiveUndo);
         tvHammer = (TextView) view.findViewById(R.id.tvAchiveHammer);
         ivAva = (CircleImageView) view.findViewById(R.id.ivAvaFb);
         update();
-        btnlogin = (Button) view.findViewById(R.id.btnLogin);
+        btnlogin = (ImageButton) view.findViewById(R.id.btnLogin);
         btnlogout = (Button) view.findViewById(R.id.btnLogout);
         tvNick = (TextView) view.findViewById(R.id.tvNick);
-        fbConnectHelper = new FbConnectHelper(this,this);
         updateDataUser();
 
         Intent intent = getActivity().getIntent();
-        if (intent.getStringExtra("Facebook") == "Log") loginwithFacebook();
+        if (intent.getStringExtra("Facebook") == "Log") {
+            loginwithFacebook();
+        }
         updateDataUser();
         update();
 

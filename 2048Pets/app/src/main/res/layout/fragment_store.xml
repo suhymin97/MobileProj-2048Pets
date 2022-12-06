@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".profile_shop.FragmentShopping"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvAchiveGold"
             android:orientation="horizontal"
-            android:paddingBottom="30dp">
+            android:paddingBottom="10dp">
 
             <ImageView
                 android:id="@+id/ivShopItem"
@@ -71,12 +72,12 @@
                 android:fontFamily="@font/comic"
                 android:text="$100"
                 android:textColor="@color/black"
-                android:textSize="@dimen/d_textScore" />
+                android:textSize="@dimen/d_store_txtprice" />
 
             <ImageButton
                 android:id="@+id/btnPurchase"
-                android:layout_width="@dimen/d_store_btnpur_h"
-                android:layout_height="@dimen/d_store_btnpur_w"
+                android:layout_width="@dimen/d_store_btnpur_w"
+                android:layout_height="0dp"
                 android:layout_below="@+id/tvNameItem"
                 android:layout_alignBottom="@id/ivShopItem"
                 android:layout_alignParentRight="true"
