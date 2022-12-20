@@ -42,33 +42,40 @@
 
     <RelativeLayout
         android:id="@+id/Spacce_Menu"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d_menulayout_h"
+        android:layout_width="694dp"
+        android:layout_height="64dp"
         android:layout_alignParentBottom="true" />
 
+    <!-- CUP of CATS -->
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Spacce_Menu"
+        android:layout_marginBottom="-3dp"
         android:paddingLeft="@dimen/d_cupcat_margin"
         android:paddingRight="@dimen/d_cupcat_margin">
 
         <!-- PLAY BUTTON -->
+
+        <!-- SOUND BUTTON -->
+
         <ImageButton
             android:id="@+id/bMenuPlay"
-            android:layout_width="@dimen/d_button_w"
-            android:layout_height="@dimen/d_butplay_h"
-            android:layout_centerInParent="true"
+            android:layout_width="270dp"
+            android:layout_height="170dp"
+            android:layout_centerInParent="false"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="50dp"
             android:background="@null"
             android:onClick="playIT"
             android:scaleType="fitCenter"
             android:src="@drawable/b_play" />
 
-        <!-- SOUND BUTTON -->
         <ImageButton
             android:id="@+id/btnSound"
-            android:layout_width="@dimen/d_menuButton"
-            android:layout_height="@dimen/d_menuButton"
+            android:layout_width="99dp"
+            android:layout_height="90dp"
             android:layout_centerHorizontal="true"
             android:background="@null"
             android:scaleType="fitCenter"
@@ -118,23 +125,26 @@
 
     </RelativeLayout>
 
-    <!-- CUP of CATS -->
     <ImageView
         android:id="@+id/ivCupCatShadow"
-        android:layout_width="@dimen/d_cupcat_w"
-        android:layout_height="@dimen/d_shadow_h"
+        android:layout_width="223dp"
+        android:layout_height="59dp"
         android:layout_alignStart="@+id/ivCupCat"
         android:layout_alignParentBottom="true"
-        android:paddingRight="@dimen/d_cupcat_margin"
+        android:layout_marginStart="-24dp"
+        android:layout_marginBottom="3dp"
         android:paddingLeft="@dimen/d_cupcat_margin"
+        android:paddingRight="@dimen/d_cupcat_margin"
         android:src="@drawable/cupcatshadow" />
 
     <ImageView
         android:id="@+id/ivCupCat"
-        android:layout_width="@dimen/d_cupcat_w"
-        android:layout_height="wrap_content"
+        android:layout_width="167dp"
+        android:layout_height="199dp"
         android:layout_below="@+id/Profile"
         android:layout_marginStart="@dimen/d_cupcat_margin"
+        android:layout_marginTop="97dp"
+        android:layout_marginLeft="50dp"
         android:onClick="moewIT"
         android:scaleType="fitCenter"
         android:src="@drawable/cupcat" />
