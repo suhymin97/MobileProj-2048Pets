@@ -60,4 +60,8 @@ public class ShopItem {
     public void setPurchase(boolean purchase) {
         this.purchase = purchase;
     }
+
+    public void returnDefault(){
+        purchase = false;
+    }
 }

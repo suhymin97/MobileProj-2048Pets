@@ -17,7 +17,10 @@
             android:id="@+id/ivAvaFb"
             android:layout_width="@dimen/d_fbicon"
             android:layout_height="@dimen/d_fbicon"
-            android:layout_margin="@dimen/d_fbicon_margin"
+            android:layout_marginStart="@dimen/d_fbicon_margin"
+            android:layout_marginTop="@dimen/d_fbicon_margin"
+            android:layout_marginEnd="@dimen/d_fbicon_margin"
+            android:layout_marginBottom="@dimen/d_fbicon_margin"
             android:src="@drawable/fbicom"
             app:civ_border_color="#fff"
             app:civ_border_width="2dp" />
@@ -47,11 +50,12 @@
         android:layout_alignParentBottom="true" />
 
     <!-- CUP of CATS -->
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/Spacce_Menu"
-        android:layout_marginBottom="-3dp"
+        android:layout_marginBottom="-19dp"
         android:paddingLeft="@dimen/d_cupcat_margin"
         android:paddingRight="@dimen/d_cupcat_margin">
 
@@ -61,11 +65,11 @@
 
         <ImageButton
             android:id="@+id/bMenuPlay"
-            android:layout_width="270dp"
-            android:layout_height="170dp"
+            android:layout_width="243dp"
+            android:layout_height="108dp"
             android:layout_centerInParent="false"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginLeft="85dp"
+            android:layout_marginTop="100dp"
             android:layout_marginBottom="50dp"
             android:background="@null"
             android:onClick="playIT"
@@ -123,6 +127,18 @@
                 android:src="@drawable/b_quit" />
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/ivCupCat"
+            android:layout_width="136dp"
+            android:layout_height="169dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="-5dp"
+            android:layout_marginLeft="-50dp"
+            android:layout_marginTop="150dp"
+            android:onClick="moewIT"
+            android:scaleType="fitCenter"
+            android:src="@drawable/cupcat" />
+
     </RelativeLayout>
 
     <ImageView
@@ -131,23 +147,13 @@
         android:layout_height="59dp"
         android:layout_alignStart="@+id/ivCupCat"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-24dp"
+        android:layout_marginStart="-10dp"
         android:layout_marginBottom="3dp"
         android:paddingLeft="@dimen/d_cupcat_margin"
         android:paddingRight="@dimen/d_cupcat_margin"
-        android:src="@drawable/cupcatshadow" />
+        android:src="@drawable/cupcatshadow"
+        tools:ignore="NotSibling" />
 
-    <ImageView
-        android:id="@+id/ivCupCat"
-        android:layout_width="167dp"
-        android:layout_height="199dp"
-        android:layout_below="@+id/Profile"
-        android:layout_marginStart="@dimen/d_cupcat_margin"
-        android:layout_marginTop="97dp"
-        android:layout_marginLeft="50dp"
-        android:onClick="moewIT"
-        android:scaleType="fitCenter"
-        android:src="@drawable/cupcat" />
     <ImageButton
         android:id="@+id/btnAbout"
         android:layout_width="@dimen/d_menuButton"

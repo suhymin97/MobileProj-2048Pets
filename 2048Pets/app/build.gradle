@@ -39,4 +39,8 @@ dependencies {
 
     //image from internet
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
 }
+

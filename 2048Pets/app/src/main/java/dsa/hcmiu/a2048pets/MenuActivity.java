@@ -24,21 +24,25 @@ import dsa.hcmiu.a2048pets.entities.handle.HandleFile;
 import dsa.hcmiu.a2048pets.entities.handle.HandleImage;
 import dsa.hcmiu.a2048pets.entities.handle.HandleSound;
 import dsa.hcmiu.a2048pets.entities.model.Features;
+import dsa.hcmiu.a2048pets.profile_shop.FragmentProfile;
 
 import static dsa.hcmiu.a2048pets.entities.model.Features.mySong;
 import static dsa.hcmiu.a2048pets.entities.model.Features.sound;
 import static dsa.hcmiu.a2048pets.entities.model.Features.user;
 
+import com.squareup.picasso.Picasso;
+
 public class MenuActivity extends Activity implements View.OnClickListener {
 
     MediaPlayer myClick;
     private ImageButton btnSound,btnQuit,btnPlay, btnStore, btnRule,btnAbout;
-    Animation uptodown,downtoup;
+    Animation upToDown, downToUp;
     ImageView imgFb,ivCupCat,ivShadow;
     LinearLayout layMenu;
     private TextView tvTotalScore;
     MediaPlayer snd_singleKitty;
     private Button btnProfile;
+    FragmentProfile fragmentProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +146,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         btnyes.setText("Github");
         btnno.setText("Not now");
         //set Anim for icon github
+
         Animation zoomin= AnimationUtils.loadAnimation(this,R.anim.zoom_in);
         Animation zoomout = AnimationUtils.loadAnimation(this,R.anim.zoom_out);
         ImageView imgIcon = (ImageView) MyDialog.findViewById(R.id.icon_github);
@@ -192,7 +197,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                 sound= !(sound || sound);
                 break;
             case R.id.btnProfile:
-                diaglogPro5();
+                dialogPro5();
                 break;
             case R.id.btnAbout:
                 Intent iAbout = new Intent(this, AboutActivity.class);
@@ -206,14 +211,13 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         myClick= MediaPlayer.create(MenuActivity.this,R.raw.click);
 
         //callAnimation
-        uptodown= AnimationUtils.loadAnimation(this,R.anim.uptodown);
-        downtoup= AnimationUtils.loadAnimation(this,R.anim.downtoup);
+        upToDown = AnimationUtils.loadAnimation(this,R.anim.uptodown);
+        downToUp = AnimationUtils.loadAnimation(this,R.anim.downtoup);
 
-        btnPlay.setAnimation(uptodown);
-        btnStore.setAnimation(uptodown);
-        btnRule.setAnimation(downtoup);
+        btnPlay.setAnimation(upToDown);
+        btnStore.setAnimation(upToDown);
+        btnRule.setAnimation(downToUp);
 
-        //loopSound
         mySong.setLooping(true);
         if (sound) mySong.start();
     }
@@ -224,7 +228,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         else imgFb.setImageResource(user.getAvatar());
     }
 
-    private void diaglogPro5() {
+    private void dialogPro5() {
         final Dialog MyDialog = new Dialog(MenuActivity.this,R.style.FullHeightDialog);
         LayoutInflater inflater = MenuActivity.this.getLayoutInflater();
         MyDialog.setContentView(R.layout.fragment_profile);
@@ -232,7 +236,9 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         TextView tvUndo = (TextView) MyDialog.findViewById(R.id.tvAchiveUndo);
         TextView tvHammer = (TextView) MyDialog.findViewById(R.id.tvAchiveHammer);
         final TextView tvNick = (TextView) MyDialog.findViewById(R.id.tvNick);
-        final ImageButton btnLogin = (ImageButton) MyDialog.findViewById(R.id.btnLogin);
+        final ImageButton btnLogin = (ImageButton) MyDialog.findViewById(R.id.btnGoogle);
+        ImageButton btnTwt = (ImageButton) MyDialog.findViewById(R.id.btnTwt);
+        ImageButton btnFb = (ImageButton) MyDialog.findViewById(R.id.btnFb);
         final Button btnLogout = (Button) MyDialog.findViewById(R.id.btnLogout);
         CircleImageView ivAva = (CircleImageView) MyDialog.findViewById(R.id.ivAvaFb);
 
@@ -245,17 +251,24 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         btnLogout.setVisibility(View.GONE);
         btnLogin.setVisibility(View.VISIBLE);
         if (user.isLoggedFb()) {
-            btnLogout.setVisibility(View.VISIBLE);
+            btnLogout.setVisibility(View.GONE);
             btnLogin.setVisibility(View.GONE);
-            btnLogout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    user.returnDef();
-                    btnLogout.setVisibility(View.GONE);
-                    btnLogin.setVisibility(View.VISIBLE);
-                    tvNick.setText(user.getName());
-                }
-            });
+            btnTwt.setVisibility(View.GONE);
+            btnFb.setVisibility(View.GONE);
+            Picasso.get().load(user.getPhotoUrl()).into(ivAva);
+//            btnLogout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    btnLogout.setVisibility(View.GONE);
+//                    btnLogin.setVisibility(View.VISIBLE);
+//                    btnTwt.setVisibility(View.VISIBLE);
+//                    btnFb.setVisibility(View.VISIBLE);
+//                    user.returnDef();
+//                    updateDataUser();
+//                    ivAva.setImageResource(user.getAvatar());
+//                    tvNick.setText(user.getName());
+//                }
+//            });
         }
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -266,5 +279,11 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                 }
             });
         MyDialog.show();
+    }
+    void updateDataUser(){
+        if(!user.isLoggedFb()){
+            user.returnDef();
+            user.setAvatar(R.drawable.default_ava);
+        }
     }
 }

@@ -15,11 +15,6 @@ import dsa.hcmiu.a2048pets.entities.model.Pets;
 import static dsa.hcmiu.a2048pets.entities.model.Board.max;
 import static dsa.hcmiu.a2048pets.entities.model.Features.user;
 
-
-/**
- * Created by Admin on 3/25/2018.
- */
-
 public class HandleGame { //singleton
 
     private static int maxValue = 8192;

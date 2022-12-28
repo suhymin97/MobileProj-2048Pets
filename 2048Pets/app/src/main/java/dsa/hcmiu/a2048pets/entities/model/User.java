@@ -1,4 +1,5 @@
 package dsa.hcmiu.a2048pets.entities.model;
+import android.net.Uri;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -21,6 +22,15 @@ public class User {
     public int undo = 5;
     public int hammer = 5;
     public ArrayList<Integer> purchasedIdItem;
+    public Uri photoUrl;
+
+    public Uri getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(Uri photoUrl) {
+        this.photoUrl = photoUrl;
+    }
 
     public User() {
         Log.d("Add user", String.valueOf(UID));
@@ -33,6 +43,7 @@ public class User {
         purchasedIdItem.add(200);
         purchasedIdItem.add(300);
     }
+
 
     public String getName() {
         return name;
@@ -93,6 +104,9 @@ public class User {
         name = MyApplication.getContext().getResources().getString(R.string.default_name);
         IDFacebook = null;
         avatar = R.drawable.default_ava;
-        loggedFb =false;
+        loggedFb = false;
+        undo = 5;
+        hammer = 5;
+        totalGold = 4000;
     }
 }

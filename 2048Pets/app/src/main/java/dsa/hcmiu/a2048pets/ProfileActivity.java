@@ -1,5 +1,6 @@
 package dsa.hcmiu.a2048pets;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -12,7 +13,7 @@ import static dsa.hcmiu.a2048pets.entities.model.Features.sound;
 
 import androidx.fragment.app.FragmentActivity;
 
-public class ProfileActivity extends FragmentActivity implements SendData {
+public class ProfileActivity extends FragmentActivity implements SendData{
 
     FragmentProfile fragmentProfile = new FragmentProfile();
     FragmentShopping fragmentShopping = new FragmentShopping();
@@ -26,8 +27,6 @@ public class ProfileActivity extends FragmentActivity implements SendData {
                 replace(R.id.fragmentProfileLand,fragmentProfile).
                 replace(R.id.fragmentShop,fragmentShopping).
                 commit();
-//        fragmentProfile = (FragmentProfile) getSupportFragmentManager().
-//                findFragmentById(R.id.fragmentProfile);
     }
 
     @Override
@@ -38,8 +37,19 @@ public class ProfileActivity extends FragmentActivity implements SendData {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        fragmentProfile.updateDataUser();
+    protected void onActivityResult(int requestCode, int resultCode,@Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
+
+    @Override
+    protected void onResume() {
+        fragmentProfile.updateDataUser();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
 }

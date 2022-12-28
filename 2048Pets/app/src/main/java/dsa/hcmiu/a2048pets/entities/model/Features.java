@@ -10,5 +10,5 @@ public class Features { //store biến static
     public static MediaPlayer mySong;
     public static boolean sound = true;
     public static User user;
-
+    public static ShopItem shopItem;
 }

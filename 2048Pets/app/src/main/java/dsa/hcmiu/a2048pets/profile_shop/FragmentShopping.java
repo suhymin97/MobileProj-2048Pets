@@ -23,6 +23,7 @@ import dsa.hcmiu.a2048pets.entities.adapter.ShopAdapter;
 import dsa.hcmiu.a2048pets.entities.handle.HandleGame;
 import dsa.hcmiu.a2048pets.entities.model.ShopItem;
 
+import static dsa.hcmiu.a2048pets.entities.model.Features.shopItem;
 import static dsa.hcmiu.a2048pets.entities.model.Features.user;
 
 public class FragmentShopping extends Fragment {
@@ -58,14 +59,11 @@ public class FragmentShopping extends Fragment {
         showItem();
         update();
         listItem.setAdapter(adapter);
-        listItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                RelativeLayout relativeLayout= (RelativeLayout) view;
-                relativeLayout.setBackgroundColor(MyApplication.getContext().getResources().getColor(R.color.white));
-                selectItem = arrayShopItem.get(position);
-                showItem();
-            }
+        listItem.setOnItemClickListener((parent, view1, position, id) -> {
+            RelativeLayout relativeLayout= (RelativeLayout) view1;
+            relativeLayout.setBackgroundColor(MyApplication.getContext().getResources().getColor(R.color.white));
+            selectItem = arrayShopItem.get(position);
+            showItem();
         });
         btnPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +119,9 @@ public class FragmentShopping extends Fragment {
             }
         });
 
+        if(!user.isLoggedFb()){
+            init();
+        }
         return view;
     }
 
@@ -151,7 +152,6 @@ public class FragmentShopping extends Fragment {
     }
 
     public void update() {
-
         for(ShopItem item: arrayShopItem) {
             for(int idPurchased: user.purchasedIdItem) {
                 if (idPurchased != item.getId()) continue;
@@ -161,5 +161,9 @@ public class FragmentShopping extends Fragment {
             }
         }
         tvGold.setText(String.valueOf(user.totalGold));
+    }
+
+    public void reset(){
+        shopItem.returnDefault();
     }
 }

@@ -53,21 +53,24 @@
             android:gravity="center">
 
             <ImageButton
+                android:id="@+id/btnGoogle"
+                android:layout_width="29dp"
+                android:layout_height="@dimen/d_btnlogin_h"
+                android:layout_margin="@dimen/d_btnlogin_w"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/google" />
+
+            <ImageButton
+                android:id="@+id/btnFb"
                 android:layout_width="@dimen/d_btnlogin_h"
                 android:layout_height="@dimen/d_btnlogin_h"
                 android:layout_margin="@dimen/d_btnlogin_w"
-                android:scaleType="fitCenter"
                 android:background="@null"
-                android:src="@drawable/google"/>
-            <ImageButton
-                android:id="@+id/btnLogin"
-                android:layout_width="@dimen/d_btnlogin_h"
-                android:layout_height="@dimen/d_btnlogin_h"
-                android:layout_margin="@dimen/d_btnlogin_w"
                 android:scaleType="fitCenter"
-                android:background="@null"
-                android:src="@drawable/fb"/>
+                android:src="@drawable/fb" />
             <ImageButton
+                android:id="@+id/btnTwt"
                 android:layout_width="@dimen/d_btnlogin_h"
                 android:layout_height="@dimen/d_btnlogin_h"
                 android:layout_margin="@dimen/d_btnlogin_w"
@@ -93,15 +96,16 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/comic"
                     android:text="Highscore"/>
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/d_achivement"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/d_textDialog"
-                    android:gravity="center"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/comic"
-                    android:text="Undo"/>
+                    android:gravity="center"
+                    android:text="Undo"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/d_textDialog" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="@dimen/d_achivement"

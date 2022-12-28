@@ -2,10 +2,12 @@ package dsa.hcmiu.a2048pets.entities.handle;
 
 import android.app.Activity;
 import androidx.fragment.app.Fragment;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -16,10 +18,10 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -28,7 +30,7 @@ import java.util.Collection;
 import dsa.hcmiu.a2048pets.entities.model.User;
 
 public class FbConnectHelper {
-    private Collection<String> permissions = Arrays.asList("public_profile ", "email", "user_birthday", "user_location");
+    private Collection<String> permissions = Arrays.asList("public_profile", "email", "user_birthday", "user_location");
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     private ShareDialog shareDialog;
@@ -36,6 +38,7 @@ public class FbConnectHelper {
     private Fragment fragment;
     private OnFbSignInListener fbSignInListener;
     private static FbConnectHelper instance;
+
 
     /**
      * Interface to listen the Facebook connect
@@ -65,23 +68,22 @@ public class FbConnectHelper {
 
     public void connect() {
         callbackManager = CallbackManager.Factory.create();
-        loginManager = LoginManager.getInstance();
-        if (activity != null)
-            loginManager.logInWithReadPermissions(activity, permissions);
-        else
-            loginManager.logInWithReadPermissions(fragment, permissions);
-        loginManager.registerCallback(callbackManager,
+        if (activity != null){
+            LoginManager.getInstance().logInWithReadPermissions(activity, permissions);
+        }
+        LoginManager.getInstance().logInWithReadPermissions(fragment, permissions);
+        LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        if (loginResult != null) {
-                            callGraphAPI(loginResult.getAccessToken());
-                        }
+                        callGraphAPI();
+                        Log.i("Success", "Login Success");
                     }
 
                     @Override
                     public void onCancel() {
                         fbSignInListener.OnFbError("User cancelled.");
+                        Log.i("Error", "User canceled");
                     }
 
                     @Override
@@ -92,25 +94,24 @@ public class FbConnectHelper {
                             }
                         }
                         fbSignInListener.OnFbError(exception.getMessage());
+                        Log.i("Error", "User Error");
                     }
                 });
 
     }
 
-    private void callGraphAPI(AccessToken accessToken) {
-        GraphRequest request = GraphRequest.newMeRequest(
-                accessToken,
-                new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        fbSignInListener.OnFbSuccess(response);
-                    }
-                });
-        Bundle parameters = new Bundle();
-        //Explicitly we need to specify the fields to get values else some values will be null.
-        parameters.putString("fields", "id,birthday,email,first_name,gender,last_name,link,location,name");
-        request.setParameters(parameters);
-        request.executeAsync();
+    public void callGraphAPI() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if (accessToken != null) {
+            GraphRequest request = GraphRequest.newMeRequest(
+                    accessToken,
+                    (object, response) -> fbSignInListener.OnFbSuccess(response));
+            Bundle parameters = new Bundle();
+            //Explicitly we need to specify the fields to get values else some values will be null.
+            parameters.putString("fields","id,birthday,email,first_name,gender,last_name,link,location,name");
+            request.setParameters(parameters);
+            request.executeAsync();
+        }
     }
 
     public void shareOnFBWall(String title, String description, String url) {
@@ -132,17 +133,12 @@ public class FbConnectHelper {
     public User getUserFromGraphResponse(GraphResponse graphResponse)
     {
         User user = new User();
-        try {
-            JSONObject jsonObject = graphResponse.getJSONObject();
-            user.setName(jsonObject.getString("name"));
-            user.setEmail(jsonObject.getString("email"));
-            user.setIDFacebook(jsonObject.getString("id"));
-            user.setProfilePic("http://graph.facebook.com/"+ user.getIDFacebook()+ "/picture?type=large");
-            Log.i("FbConnect",user.getProfilePic());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
+        JSONObject jsonObject = graphResponse.getJSONObject();
+        user.setName(jsonObject.optString("name"));
+        user.setEmail(jsonObject.optString("email"));
+        user.setIDFacebook(jsonObject.optString("id"));
+        user.setProfilePic("http://graph.facebook.com/"+ user.getIDFacebook()+ "/picture?type=large");
+        Log.i("FbConnect",user.getProfilePic());
         return user;
     }
 }
