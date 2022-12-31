@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,16 +8,39 @@
     android:orientation="horizontal"
     tools:context="dsa.hcmiu.a2048pets.PlayActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glstart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.175"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.669"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gltop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.033"/>
+
     <GridView
         android:id="@+id/gvMatrix"
-        android:layout_width="@dimen/d_grid"
-        android:layout_height="@dimen/d_grid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="@dimen/d_grid_mleft"
         android:numColumns="4"
         android:paddingBottom="5dp"
-        android:scrollbars="none"></GridView>
+        android:scrollbars="none"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="@+id/glstart"
+        app:layout_constraintEnd_toEndOf="@+id/glend"
+        app:layout_constraintTop_toTopOf="@+id/gltop"
+        />
 
     <RelativeLayout
         android:id="@+id/ctnFunc"
@@ -26,7 +49,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginLeft="@dimen/d_hscore_m"
         android:layout_marginTop="@dimen/d_hscore_m"
-        android:layout_toRightOf="@+id/gvMatrix">
+        app:layout_constraintStart_toStartOf="@+id/glend"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!--Highscrore -->
         <LinearLayout
@@ -62,10 +86,11 @@
                 <TextView
                     android:id="@+id/tvNameHighscore"
                     android:layout_width="match_parent"
-                    android:layout_height="17dp"
+                    android:layout_height="0dp"
                     android:fontFamily="@font/comicbd"
                     android:gravity="center"
                     android:text="Highscore"
+                    android:layout_weight="1"
                     android:textColor="#000"
                     android:textSize="@dimen/d_txtScore" />
 
@@ -182,4 +207,4 @@
 
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

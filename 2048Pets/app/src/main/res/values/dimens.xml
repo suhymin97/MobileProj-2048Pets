@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="d_over">175dp</dimen>
-    <dimen name="d_textDialog">11dp</dimen>
+    <dimen name="d_textDialog">12dp</dimen>
     <dimen name="d_fbicon">50dp</dimen>
     <dimen name="d_fbicon_margin">7dp</dimen>
     <dimen name="d_avaProfile">62dp</dimen>
@@ -10,7 +10,7 @@
     <dimen name="d_marginFBtnPlay">5dp</dimen>
     <dimen name="d_menuButton">100dp</dimen>
     <dimen name="d_paddingMenuBtn">17dp</dimen>
-    <dimen name="d_achivement">21dp</dimen>
+    <dimen name="d_achivement">30dp</dimen>
     <dimen name="d_itemshop">77dp</dimen>
     <dimen name="d_gold">20dp</dimen>
     <dimen name="d_marginitemshop">5dp</dimen>
