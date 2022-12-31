@@ -24,7 +24,6 @@ import dsa.hcmiu.a2048pets.entities.handle.HandleFile;
 import dsa.hcmiu.a2048pets.entities.handle.HandleImage;
 import dsa.hcmiu.a2048pets.entities.handle.HandleSound;
 import dsa.hcmiu.a2048pets.entities.model.Features;
-import dsa.hcmiu.a2048pets.profile_shop.FragmentProfile;
 
 import static dsa.hcmiu.a2048pets.entities.model.Features.mySong;
 import static dsa.hcmiu.a2048pets.entities.model.Features.sound;
@@ -35,14 +34,13 @@ import com.squareup.picasso.Picasso;
 public class MenuActivity extends Activity implements View.OnClickListener {
 
     MediaPlayer myClick;
-    private ImageButton btnSound,btnQuit,btnPlay, btnStore, btnRule,btnAbout;
-    Animation upToDown, downToUp;
+    private ImageButton btnSound,btnQuit,btnPlay, btnStore, btnRule,btnAbout, btnPvp;
+    Animation uptodown,downtoup;
     ImageView imgFb,ivCupCat,ivShadow;
     LinearLayout layMenu;
     private TextView tvTotalScore;
     MediaPlayer snd_singleKitty;
     private Button btnProfile;
-    FragmentProfile fragmentProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +48,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_menu);
 
         btnPlay = (ImageButton) findViewById(R.id.bMenuPlay);
+        btnPvp = (ImageButton) findViewById(R.id.bMenuPvp);
         btnRule = (ImageButton) findViewById(R.id.bRule);
         btnStore = (ImageButton) findViewById(R.id.bStore);
         btnQuit = (ImageButton) findViewById(R.id.bQuit);
@@ -64,6 +63,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         update();
         btnRule.setOnClickListener(this);
         btnPlay.setOnClickListener(this);
+        btnPvp.setOnClickListener(this);
         btnStore.setOnClickListener(this);
         btnQuit.setOnClickListener(this);
         btnSound.setOnClickListener(this);
@@ -102,6 +102,9 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         snd_singleKitty.start();
     }
     public void playIT(View view){
+        myClick.start();
+    }
+    public void playPvpIT(View view){
         myClick.start();
     }
     public void storeIT(View view){
@@ -146,7 +149,6 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         btnyes.setText("Github");
         btnno.setText("Not now");
         //set Anim for icon github
-
         Animation zoomin= AnimationUtils.loadAnimation(this,R.anim.zoom_in);
         Animation zoomout = AnimationUtils.loadAnimation(this,R.anim.zoom_out);
         ImageView imgIcon = (ImageView) MyDialog.findViewById(R.id.icon_github);
@@ -156,7 +158,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         btnyes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/suhymin97/2048Pets")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/suhymin97/MobileProj-2048Pets")));
                 System.exit(0);
             }
         });
@@ -175,6 +177,10 @@ public class MenuActivity extends Activity implements View.OnClickListener {
             case R.id.bMenuPlay:
                 Intent iPlay = new Intent(this, PlayActivity.class);
                 startActivity(iPlay);
+                break;
+            case R.id.bMenuPvp:
+                Intent iPvp = new Intent(this, PlayPvpActivity.class);
+                startActivity(iPvp);
                 break;
             case R.id.bStore:
                 Intent iProfile = new Intent(this, ProfileActivity.class);
@@ -211,13 +217,15 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         myClick= MediaPlayer.create(MenuActivity.this,R.raw.click);
 
         //callAnimation
-        upToDown = AnimationUtils.loadAnimation(this,R.anim.uptodown);
-        downToUp = AnimationUtils.loadAnimation(this,R.anim.downtoup);
+        uptodown= AnimationUtils.loadAnimation(this,R.anim.uptodown);
+        downtoup= AnimationUtils.loadAnimation(this,R.anim.downtoup);
 
-        btnPlay.setAnimation(upToDown);
-        btnStore.setAnimation(upToDown);
-        btnRule.setAnimation(downToUp);
+        btnPlay.setAnimation(uptodown);
+        btnPvp.setAnimation(uptodown);
+        btnStore.setAnimation(uptodown);
+        btnRule.setAnimation(downtoup);
 
+        //loopSound
         mySong.setLooping(true);
         if (sound) mySong.start();
     }
@@ -236,7 +244,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         TextView tvUndo = (TextView) MyDialog.findViewById(R.id.tvAchiveUndo);
         TextView tvHammer = (TextView) MyDialog.findViewById(R.id.tvAchiveHammer);
         final TextView tvNick = (TextView) MyDialog.findViewById(R.id.tvNick);
-        final ImageButton btnLogin = (ImageButton) MyDialog.findViewById(R.id.btnGoogle);
+        final ImageButton btnGg = (ImageButton) MyDialog.findViewById(R.id.btnGoogle);
         ImageButton btnTwt = (ImageButton) MyDialog.findViewById(R.id.btnTwt);
         ImageButton btnFb = (ImageButton) MyDialog.findViewById(R.id.btnFb);
         final Button btnLogout = (Button) MyDialog.findViewById(R.id.btnLogout);
@@ -249,10 +257,10 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         if (user.getAvatar() != 0) ivAva.setImageResource(user.getAvatar());
         else HandleImage.get().loadImageFromDisk(ivAva);
         btnLogout.setVisibility(View.GONE);
-        btnLogin.setVisibility(View.VISIBLE);
-        if (user.isLoggedFb()) {
+        btnGg.setVisibility(View.VISIBLE);
+        if (user.isLogged()) {
             btnLogout.setVisibility(View.GONE);
-            btnLogin.setVisibility(View.GONE);
+            btnGg.setVisibility(View.GONE);
             btnTwt.setVisibility(View.GONE);
             btnFb.setVisibility(View.GONE);
             Picasso.get().load(user.getPhotoUrl()).into(ivAva);
@@ -270,18 +278,28 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 //                }
 //            });
         }
-            btnLogin.setOnClickListener(new View.OnClickListener() {
+            btnFb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent iPro5 = new Intent(getApplicationContext(), ProfileActivity.class);
-                    iPro5.putExtra("Facebook", "Log");
-                    startActivity(iPro5);
+                    profileClick("F");
+                }
+            });
+            btnGg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    profileClick("G");
                 }
             });
         MyDialog.show();
     }
-    void updateDataUser(){
-        if(!user.isLoggedFb()){
+
+    private void profileClick(String type) {
+        Intent iPro5 = new Intent(getApplicationContext(), ProfileActivity.class);
+        iPro5.putExtra("Social", type);
+        startActivity(iPro5);
+    }
+    private void updateDataUser(){ //Duc
+        if(!user.isLogged()){
             user.returnDef();
             user.setAvatar(R.drawable.default_ava);
         }

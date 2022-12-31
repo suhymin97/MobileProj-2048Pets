@@ -27,12 +27,17 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.4.0'
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.fragment:fragment:1.5.4"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
-    implementation "androidx.fragment:fragment:1.5.4"
+    implementation 'com.facebook.android:facebook-android-sdk:12.3.0'
 
     //round image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -40,4 +45,10 @@ dependencies {
     //image from internet
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
+    implementation ('io.socket:socket.io-client:2.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+
+
+
 }

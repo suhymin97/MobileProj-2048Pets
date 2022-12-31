@@ -61,7 +61,7 @@ public class ShopItem {
         this.purchase = purchase;
     }
 
-    public void returnDefault(){
+    public void returnDefault(){ //Duc
         purchase = false;
     }
 }

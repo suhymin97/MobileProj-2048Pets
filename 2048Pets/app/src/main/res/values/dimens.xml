@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="d_over">175dp</dimen>
-    <dimen name="d_textDialog">9dp</dimen>
+    <dimen name="d_textDialog">11dp</dimen>
     <dimen name="d_fbicon">50dp</dimen>
     <dimen name="d_fbicon_margin">7dp</dimen>
     <dimen name="d_avaProfile">62dp</dimen>
@@ -18,10 +18,10 @@
     <dimen name="d_menulayout_h">87dp</dimen>
     <dimen name="d_menulayout_mend">18dp</dimen>
 
-    <dimen name="d_cupcat_w">255dp</dimen>
+    <dimen name="d_cupcat_w">245dp</dimen>
     <dimen name="d_shadow_w">207dp</dimen>
     <dimen name="d_shadow_h">49dp</dimen>
-    <dimen name="d_cupcat_margin">35dp</dimen>
+    <dimen name="d_cupcat_margin">15dp</dimen>
     <dimen name="d_cupcat_start">22dp</dimen>
     <dimen name="d_cupcat_top">1dp</dimen>
 

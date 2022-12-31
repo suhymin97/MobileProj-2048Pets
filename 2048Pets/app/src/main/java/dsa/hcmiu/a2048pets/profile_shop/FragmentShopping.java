@@ -1,8 +1,8 @@
 package dsa.hcmiu.a2048pets.profile_shop;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,11 +59,20 @@ public class FragmentShopping extends Fragment {
         showItem();
         update();
         listItem.setAdapter(adapter);
-        listItem.setOnItemClickListener((parent, view1, position, id) -> {
-            RelativeLayout relativeLayout= (RelativeLayout) view1;
-            relativeLayout.setBackgroundColor(MyApplication.getContext().getResources().getColor(R.color.white));
-            selectItem = arrayShopItem.get(position);
-            showItem();
+//		listItem.setOnItemClickListener((parent, view1, position, id) -> { //duc
+//            RelativeLayout relativeLayout= (RelativeLayout) view1;
+//            relativeLayout.setBackgroundColor(MyApplication.getContext().getResources().getColor(R.color.white));
+//            selectItem = arrayShopItem.get(position);
+//            showItem();
+//        });
+        listItem.setOnItemClickListener(new AdapterView.OnItemClickListener() { //avu7
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                RelativeLayout relativeLayout= (RelativeLayout) view;
+                relativeLayout.setBackgroundColor(MyApplication.getContext().getResources().getColor(R.color.white));
+                selectItem = arrayShopItem.get(position);
+                showItem();
+            }
         });
         btnPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +106,7 @@ public class FragmentShopping extends Fragment {
                         user.purchasedIdItem.add(selectItem.getId());
                         break;
                     case 4: //fb ava
-                        if (!user.isLoggedFb()) {
+                        if (!user.isLogged()) {
                             Toast.makeText(getActivity(),"You haven't connect with facebook",Toast.LENGTH_LONG).show();
                             user.totalGold += selectItem.getPrice();
                             break;
@@ -119,7 +128,7 @@ public class FragmentShopping extends Fragment {
             }
         });
 
-        if(!user.isLoggedFb()){
+        if(!user.isLogged()){
             init();
         }
         return view;

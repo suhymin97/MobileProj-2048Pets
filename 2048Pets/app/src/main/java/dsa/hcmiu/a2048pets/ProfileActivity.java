@@ -2,7 +2,6 @@ package dsa.hcmiu.a2048pets;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import dsa.hcmiu.a2048pets.profile_shop.FragmentProfile;
 import dsa.hcmiu.a2048pets.profile_shop.FragmentShopping;
@@ -11,6 +10,7 @@ import dsa.hcmiu.a2048pets.profile_shop.SendData;
 import static dsa.hcmiu.a2048pets.entities.model.Features.mySong;
 import static dsa.hcmiu.a2048pets.entities.model.Features.sound;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 public class ProfileActivity extends FragmentActivity implements SendData{

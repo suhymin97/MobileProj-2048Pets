@@ -15,7 +15,7 @@ public class User {
     private String email = null;
     private String IDFacebook = null;
     private String profilePic;
-    private boolean loggedFb;
+    private boolean logged;
     private int avatar;
     public String UserHighScore = "Bot";
     public long highScore = 0;
@@ -23,6 +23,7 @@ public class User {
     public int hammer = 5;
     public ArrayList<Integer> purchasedIdItem;
     public Uri photoUrl;
+    public String socialType = null;
 
     public Uri getPhotoUrl() {
         return photoUrl;
@@ -36,14 +37,12 @@ public class User {
         Log.d("Add user", String.valueOf(UID));
         name = MyApplication.getContext().getResources().getString(R.string.default_name);
         UID = ++Features.uidCount;
-        loggedFb = false;
+        logged = false;
         setAvatar(R.drawable.default_ava);
-        avatar = R.drawable.default_ava;
         purchasedIdItem = new ArrayList<>();
         purchasedIdItem.add(200);
         purchasedIdItem.add(300);
     }
-
 
     public String getName() {
         return name;
@@ -69,12 +68,12 @@ public class User {
         this.IDFacebook = IDFacebook;
     }
 
-    public boolean isLoggedFb() {
-        return loggedFb;
+    public boolean isLogged() {
+        return logged;
     }
 
-    public void setLoggedFb(boolean loggedFb) {
-        this.loggedFb = loggedFb;
+    public void setLogged(boolean logged) {
+        this.logged = logged;
     }
 
     public int getAvatar() {
@@ -93,6 +92,14 @@ public class User {
         this.profilePic = profilePic;
     }
 
+    public String getSocialType() {
+        return socialType;
+    }
+
+    public void setSocialType(String socialType) {
+        this.socialType = socialType;
+    }
+
     public void unPurcahsedIdItem(int id) {
         for (int i=0; i< purchasedIdItem.size();i++) {
             if (purchasedIdItem.get(i) != id ) continue;
@@ -104,9 +111,6 @@ public class User {
         name = MyApplication.getContext().getResources().getString(R.string.default_name);
         IDFacebook = null;
         avatar = R.drawable.default_ava;
-        loggedFb = false;
-        undo = 5;
-        hammer = 5;
-        totalGold = 4000;
+        logged =false;
     }
 }

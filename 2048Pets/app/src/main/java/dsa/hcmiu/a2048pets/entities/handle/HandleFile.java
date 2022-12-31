@@ -3,7 +3,6 @@ package dsa.hcmiu.a2048pets.entities.handle;
 import android.content.Context;
 import android.util.JsonWriter;
 import android.util.Log;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,11 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 
 import dsa.hcmiu.a2048pets.MyApplication;
-import dsa.hcmiu.a2048pets.R;
 import dsa.hcmiu.a2048pets.entities.model.Features;
 
 import static dsa.hcmiu.a2048pets.entities.model.Features.user;
@@ -28,9 +25,9 @@ public class HandleFile {
 
     private static HandleFile instance;
     private static String url = "highscore.txt";
-    private Context context;
-    private String file = "feature.json";
-    private StringWriter output;
+    private static Context context;
+    private static String file = "feature.json";
+    private static StringWriter output;
 
     private HandleFile() {
         context = MyApplication.getContext();
@@ -42,7 +39,7 @@ public class HandleFile {
         }
         return instance;
     }
-    public void readFeaturesJSONFile() throws IOException, JSONException {
+    public static void readFeaturesJSONFile() throws IOException, JSONException {
 
         // Đọc nội dung text của file company.json
         String jsonText = readText();
@@ -55,15 +52,17 @@ public class HandleFile {
 
         JSONObject jsonUser = jsonRoot.getJSONObject("user");
         user.setName(jsonUser.getString("name"));
+        user.setLogged(jsonUser.getBoolean("logged"));
+        user.setSocialType(jsonUser.getString("SocialMedia"));
         user.setEmail(jsonUser.getString("email"));
         user.setIDFacebook(jsonUser.getString("IDFb"));
         user.setProfilePic(jsonUser.getString("profilePic"));
-        user.setLoggedFb(jsonUser.getBoolean("loggedFb"));
         user.setAvatar(jsonUser.getInt("avatar"));
         user.highScore = jsonUser.getLong("highScore");
         user.undo = jsonUser.getInt("undo");
         user.hammer = jsonUser.getInt("hammer");
         user.totalGold = jsonUser.getLong("totalGold");
+
 
         JSONArray jsonArray = jsonUser.getJSONArray("purchasedIdItem");
         int[] id = new int[jsonArray.length()];
@@ -75,7 +74,7 @@ public class HandleFile {
 
 
     // Đọc nội dung text của một file nguồn.
-    private String readText() throws IOException {
+    private static String readText() throws IOException {
         InputStream is = context.openFileInput(file);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
@@ -87,7 +86,7 @@ public class HandleFile {
         return sb.toString();
     }
 
-    public void convertToJSON() throws IOException {
+    public static void convertToJSON() throws IOException {
         output = new StringWriter();
         JsonWriter jsonWriter = new JsonWriter(output);
 
@@ -97,10 +96,11 @@ public class HandleFile {
         // "user": { ... }
         jsonWriter.name("user").beginObject(); // begin user
         jsonWriter.name("name").value(user.getName());
+        jsonWriter.name("logged").value(user.isLogged());
+        jsonWriter.name("SocialMedia").value(user.getSocialType());
         jsonWriter.name("email").value(user.getEmail());
         jsonWriter.name("IDFb").value(user.getIDFacebook());
         jsonWriter.name("profilePic").value(user.getProfilePic());
-        jsonWriter.name("loggedFb").value(user.isLoggedFb());
         jsonWriter.name("avatar").value(user.getAvatar());
         jsonWriter.name("highScore").value(user.highScore);
         jsonWriter.name("undo").value(user.undo);
@@ -118,7 +118,7 @@ public class HandleFile {
         jsonWriter.endObject();
     }
 
-    public void writeToFile() throws IOException {
+    public static void writeToFile() throws IOException {
         convertToJSON();
         FileOutputStream fos = context.openFileOutput(file,Context.MODE_PRIVATE);
         fos.write(output.toString().getBytes());
