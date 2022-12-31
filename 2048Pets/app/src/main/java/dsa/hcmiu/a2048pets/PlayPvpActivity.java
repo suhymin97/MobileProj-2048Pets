@@ -7,6 +7,9 @@ import static dsa.hcmiu.a2048pets.entities.model.Features.user;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +35,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import dsa.hcmiu.a2048pets.entities.adapter.ItemAdapter;
+import dsa.hcmiu.a2048pets.entities.handle.HandleFile;
 import dsa.hcmiu.a2048pets.entities.handle.HandleGame;
 import dsa.hcmiu.a2048pets.entities.handle.OnSwipeTouchListener;
 import dsa.hcmiu.a2048pets.entities.model.Features;
@@ -100,20 +104,19 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
         tvHammer = (TextView) findViewById(R.id.tvHammerPvp);
         tvCompScore = (TextView) findViewById(R.id.tvComponentScore);
         tvMess = (TextView) findViewById(R.id.tvMessPvp);
-
         btnUndo = (Button) findViewById(R.id.btnUndoPvp);
         btnHammer = (Button) findViewById(R.id.btnHammerPvp);
         btnNew = (Button) findViewById(R.id.btnNewGamePvp);
         btnSoundPlay = (Button) findViewById(R.id.btnSoundPlayPvp);
-
+        dialogShareLink();
         create();
         setData();
-        connect();
 
         btnUndo.setOnClickListener(this) ;
         btnNew.setOnClickListener(this);
         btnSoundPlay.setOnClickListener(this);
         btnHammer.setOnClickListener(this);
+        tvMess.setOnClickListener(this);
     }
 
     private void create() {
@@ -127,17 +130,43 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
         update();
     }
 
+    public void dialogShareLink() {
+        final Dialog myDialog = new Dialog(PlayPvpActivity.this, R.style.FullHeightDialog);
+        LayoutInflater inflater = PlayPvpActivity.this.getLayoutInflater();
+        myDialog.setContentView(R.layout.dialog);
+        Button btnyes = (Button) myDialog.findViewById(R.id.btnyes);
+        Button btnno = (Button) myDialog.findViewById(R.id.btnno);
+        TextView tvMess = (TextView) myDialog.findViewById(R.id.tvMessage);
+        btnyes.setText("Copy");
+        btnno.setVisibility(View.GONE);
+        tvMess.setText(Features.GAME_SERVER_URL);
+        Animation zoomin = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
+        Animation zoomout = AnimationUtils.loadAnimation(this, R.anim.zoom_out);
+        ImageView imgIcon = (ImageView) myDialog.findViewById(R.id.icon_github);
+        imgIcon.setAnimation(zoomin);
+        imgIcon.setAnimation(zoomout);
+        btnyes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Share url", Features.GAME_SERVER_URL);
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(getApplicationContext(),
+                        "Copied to Clipboard", Toast.LENGTH_LONG).show();
+                connect();
+                myDialog.cancel();
+            }
+        });
+        myDialog.show();
+    }
+
+
     private void connect() {
 //        mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect);
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
 //        mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
 //        mSocket.on(Socket.EVENT_CONNECT, onConnect);
         mSocket.on("player-number", playernumber);
-//        mSocket.on("new message", onNewMessage);
-//        mSocket.on("user joined", onUserJoined);
-//        mSocket.on("user left", onUserLeft);
-//        mSocket.on("typing", onTyping);
-//        mSocket.on("stop typing", onStopTyping);
         mSocket.connect();
 
     }
@@ -220,9 +249,8 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
                 HandleGame.getInstance().hammer();
                 update();
                 break;
-            case R.id.btnShopPA:
-                Intent intent = new Intent(this, ProfileActivity.class);
-                startActivity(intent);
+            case R.id.tvMessPvp:
+                dialogShareLink();
                 break;
         }
     }
@@ -242,14 +270,6 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
                     } else { // Immediately start the game if we're player two
                         setUpGame();
                     }
-
-//                    if(!isConnected) {
-//                        if(null!=mUsername)
-//                            mSocket.emit("add user", mUsername);
-//                        Toast.makeText(getApplicationContext(),
-//                                R.string.connect, Toast.LENGTH_LONG).show();
-//                        isConnected = true;
-//                    }
                 }
             });
         }
@@ -293,21 +313,25 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
         gvMatrix.setOnTouchListener(new OnSwipeTouchListener(PlayPvpActivity.this) { //extend class OnswipeTouch
             public void onSwipeUp() {
                 HandleGame.getInstance().moveUp();
+                mSocket.emit("actuate", HandleGame.curBoard.getScoreBoard());
                 check();
             }
 
             public void onSwipeRight() {
                 HandleGame.getInstance().moveRight();
+                mSocket.emit("actuate", HandleGame.curBoard.getScoreBoard());
                 check();
             }
 
             public void onSwipeLeft() {
                 HandleGame.getInstance().moveLeft();
+                mSocket.emit("actuate", HandleGame.curBoard.getScoreBoard());
                 check();
             }
 
             public void onSwipeDown() {
                 HandleGame.getInstance().moveDown();
+                mSocket.emit("actuate", HandleGame.curBoard.getScoreBoard());
                 check();
             }
         });

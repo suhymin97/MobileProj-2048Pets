@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,6 +13,8 @@ import android.widget.TextView;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import dsa.hcmiu.a2048pets.entities.handle.HandleFile;
 import dsa.hcmiu.a2048pets.entities.model.Features;
@@ -70,6 +71,7 @@ public class WelcomeActivity extends Activity {
 
     public int initData() {
         Features.user = new User();
+        Features.usersList =  new HashMap<>();
         try {
             HandleFile.get().readFeaturesJSONFile();
             Log.d("Welcome", "onCreate: ReadJson");

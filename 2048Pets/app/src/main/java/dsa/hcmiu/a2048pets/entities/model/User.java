@@ -100,6 +100,14 @@ public class User {
         this.socialType = socialType;
     }
 
+    public long getUID() {
+        return UID;
+    }
+
+    public void setUID(long UID) {
+        this.UID = UID;
+    }
+
     public void unPurcahsedIdItem(int id) {
         for (int i=0; i< purchasedIdItem.size();i++) {
             if (purchasedIdItem.get(i) != id ) continue;

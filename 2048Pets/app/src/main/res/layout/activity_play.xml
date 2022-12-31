@@ -46,7 +46,6 @@
         android:id="@+id/ctnFunc"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
         android:layout_marginLeft="@dimen/d_hscore_m"
         android:layout_marginTop="@dimen/d_hscore_m"
         app:layout_constraintStart_toStartOf="@+id/glend"
