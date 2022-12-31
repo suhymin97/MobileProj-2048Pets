@@ -2,13 +2,14 @@
 Game Project "2048"
 
 A small project based on [1024](https://play.google.com/store/apps/details?id=com.veewo.a1024) with some more features and shopping activity.
-This is our Data Structure Algorithm project.
+This is our Mobile Application Development project.
 
 ### Contributions
 
  - [Tu Anh](https://github.com/suhymin97/) 
+ - [Duc Cong](https://github.com/ITITIU19087/) 
 
-Many thanks to prof.Tran Thanh Tung for many useful advise.
+Many thanks to Dr. Le Duy Tan for many useful advise.
 
 ### Screenshot
 
