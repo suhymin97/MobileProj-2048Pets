@@ -8,6 +8,7 @@ This is our Mobile Application Development project.
 
  - [Tu Anh](https://github.com/suhymin97/) 
  - [Duc Cong](https://github.com/ITITIU19087/) 
+ - [Anh Tuan](https://github.com/atuans/) 
 
 Many thanks to Dr. Le Duy Tan for many useful advise.
 
