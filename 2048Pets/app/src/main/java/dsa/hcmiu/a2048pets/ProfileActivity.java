@@ -30,9 +30,16 @@ public class ProfileActivity extends FragmentActivity implements SendData{
     }
 
     @Override
-    public void data(boolean update) {
+    public void dataProfile(boolean update) {
         if (update) {
             fragmentProfile.update();
+        }
+    }
+
+    @Override
+    public void dataShopping(boolean update) {
+        if (update) {
+            fragmentShopping.onChangeData();
         }
     }
 
@@ -41,11 +48,12 @@ public class ProfileActivity extends FragmentActivity implements SendData{
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    protected void onResume() {
-        fragmentProfile.updateDataUser();
-        super.onResume();
-    }
+//    @Override
+//    protected void onResume() {
+//        fragmentProfile.update();
+//        fragmentShopping.onChangeData();
+//        super.onResume();
+//    }
 
     @Override
     protected void onPause() {

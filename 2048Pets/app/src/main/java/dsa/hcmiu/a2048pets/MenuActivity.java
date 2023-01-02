@@ -129,15 +129,16 @@ public class MenuActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
+        quit();
+    }
+
+    private void quit() {
         try {
-            quit();
+            HandleFile.get().writeUserToFile();
+            HandleFile.get().writeFeatureToFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void quit() throws IOException {
-        HandleFile.get().writeToFile();
         final Dialog MyDialog = new Dialog(MenuActivity.this,R.style.FullHeightDialog);
         LayoutInflater inflater = MenuActivity.this.getLayoutInflater();
         MyDialog.setContentView(R.layout.dialog);
@@ -191,11 +192,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                 startActivity(iRule);
                 break;
             case R.id.bQuit:
-                try {
-                    quit();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                quit();
                 break;
             case R.id.btnSound:
                 if (sound) mySong.pause();
@@ -213,7 +210,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
     }
     private void soundSetup() {
         //sound
-        Features.mySong= MediaPlayer.create(MenuActivity.this,R.raw.song);
+//        Features.mySong= MediaPlayer.create(MenuActivity.this,R.raw.song);
         myClick= MediaPlayer.create(MenuActivity.this,R.raw.click);
 
         //callAnimation
@@ -263,7 +260,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
             btnGg.setVisibility(View.GONE);
             btnTwt.setVisibility(View.GONE);
             btnFb.setVisibility(View.GONE);
-            Picasso.get().load(user.getPhotoUrl()).into(ivAva);
+//            Picasso.get().load(user.getPhotoUrl()).into(ivAva);
 //            btnLogout.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {

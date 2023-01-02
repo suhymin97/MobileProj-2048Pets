@@ -24,6 +24,7 @@ public class User {
     public ArrayList<Integer> purchasedIdItem;
     public Uri photoUrl;
     public String socialType = null;
+    private String acessTokenFb = null;
 
     public Uri getPhotoUrl() {
         return photoUrl;
@@ -100,6 +101,14 @@ public class User {
         this.socialType = socialType;
     }
 
+    public String getAcessTokenFb() {
+        return acessTokenFb;
+    }
+
+    public void setAcessTokenFb(String acessTokenFb) {
+        this.acessTokenFb = acessTokenFb;
+    }
+
     public long getUID() {
         return UID;
     }
@@ -120,5 +129,13 @@ public class User {
         IDFacebook = null;
         avatar = R.drawable.default_ava;
         logged =false;
+    }
+
+    public void reset() {
+        undo = 5;
+        hammer = 5;
+        highScore = 0;
+        totalGold = 4000;
+        purchasedIdItem.clear();
     }
 }

@@ -13,9 +13,10 @@
         android:roundIcon="@drawable/ic_round"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+
         <activity
             android:name=".PlayPvpActivity"
-            android:screenOrientation="sensorLandscape"/>
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".WelcomeActivity"
             android:exported="true"

@@ -2,6 +2,7 @@ package dsa.hcmiu.a2048pets;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -14,7 +15,6 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import dsa.hcmiu.a2048pets.entities.handle.HandleFile;
 import dsa.hcmiu.a2048pets.entities.model.Features;
@@ -70,16 +70,17 @@ public class WelcomeActivity extends Activity {
     }
 
     public int initData() {
-        Features.user = new User();
         Features.usersList =  new HashMap<>();
+        Features.user = new User();
         try {
-            HandleFile.get().readFeaturesJSONFile();
+            if (HandleFile.get().readJSONFile() == null) {
+                Features.reset();
+            };
             Log.d("Welcome", "onCreate: ReadJson");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
+        Features.mySong= MediaPlayer.create(getApplication(),R.raw.song);
         return 50;
     }
 }

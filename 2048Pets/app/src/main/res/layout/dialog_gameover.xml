@@ -22,18 +22,12 @@
         android:textColor="#999999"
         android:textSize="@dimen/d_textDialog" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="horizontal"
-        android:paddingLeft="300dp">
-
         <Button
             android:id="@+id/btnok"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="20dp"
             android:background="#FFFFFF"
             android:fontFamily="@font/mvboli"
             android:gravity="center"
@@ -41,5 +35,4 @@
             android:textColor="@color/pinkAcent"
             android:textSize="@dimen/d_textDialog"
             android:textStyle="bold" />
-    </LinearLayout>
 </LinearLayout>

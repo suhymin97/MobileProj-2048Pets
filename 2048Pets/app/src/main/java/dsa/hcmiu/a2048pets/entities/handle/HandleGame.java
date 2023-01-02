@@ -10,6 +10,7 @@ import java.util.Stack;
 import dsa.hcmiu.a2048pets.MyApplication;
 import dsa.hcmiu.a2048pets.R;
 import dsa.hcmiu.a2048pets.entities.model.Board;
+import dsa.hcmiu.a2048pets.entities.model.Features;
 import dsa.hcmiu.a2048pets.entities.model.Pets;
 
 import static dsa.hcmiu.a2048pets.entities.model.Board.max;

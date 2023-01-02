@@ -30,6 +30,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.internal.OnConnectionFailedListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
@@ -40,6 +41,7 @@ import dsa.hcmiu.a2048pets.entities.handle.HandleFile;
 import dsa.hcmiu.a2048pets.entities.handle.HandleImage;
 import dsa.hcmiu.a2048pets.entities.model.User;
 
+import static dsa.hcmiu.a2048pets.entities.model.Features.GUEST;
 import static dsa.hcmiu.a2048pets.entities.model.Features.user;
 
 import java.io.IOException;
@@ -56,6 +58,7 @@ public class FragmentProfile extends Fragment implements OnConnectionFailedListe
     private FbConnectHelper fbConnectHelper;
     private GoogleSignInOptions gso;
     private GoogleSignInClient gsc;
+    private SendData sendData;
 
 
     @Override
@@ -82,6 +85,7 @@ public class FragmentProfile extends Fragment implements OnConnectionFailedListe
 		btnGoogle = view.findViewById(R.id.btnGoogle);
         btnFb = view.findViewById(R.id.btnFb);
         btnTwt = view.findViewById(R.id.btnTwt);
+        sendData = (SendData) getActivity();
 //		update(); //avu7
 //        updateDataUser(); //avu7
 
@@ -132,10 +136,17 @@ public class FragmentProfile extends Fragment implements OnConnectionFailedListe
     public void OnFbSuccess(GraphResponse graphResponse) {
         try {
             user = fbConnectHelper.getUserFromGraphResponse(graphResponse);
+            HandleFile.readUserFile();
         } catch (JSONException e) {
             e.printStackTrace();
         }
         updateDataUser();
+    }
+
+    @Override
+    public void OnFbProfilePicture(GraphResponse graphResponse) {
+//        HandleImage.get().downloadSaveImageFromUrl(graphResponse.getConnection().toString());
+//        user.setPhotoUrl(graphResponse.\);
     }
 
     @Override
@@ -153,8 +164,8 @@ public class FragmentProfile extends Fragment implements OnConnectionFailedListe
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                 handleSignInGoogle(task);
                 Toast.makeText(this.getContext(), "Success", Toast.LENGTH_SHORT).show();
-                updateDataUser();
         }
+        sendData.dataShopping(true);
     }
 
     private void handleSignInGoogle(Task<GoogleSignInAccount> completedTask) {
@@ -165,15 +176,15 @@ public class FragmentProfile extends Fragment implements OnConnectionFailedListe
                 user.setLogged(true);
                 user.setName(account.getGivenName());
                 user.setIDFacebook(account.getId());
-                user.setProfilePic(String.valueOf(account.getPhotoUrl()));
+                user.setProfilePic(account.getPhotoUrl().toString());
                 user.setPhotoUrl(account.getPhotoUrl());
                 user.setSocialType("G");
                 HandleImage.get().downloadSaveImageFromUrl(user.getProfilePic());
 //            Picasso.get().load(account.getPhotoUrl()).into(ivAva);
+                HandleFile.readUserFile();
+                updateDataUser();
             }
-            else {
-                user.getAvatar();
-            }
+//            else user.getAvatar();
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -194,10 +205,10 @@ public class FragmentProfile extends Fragment implements OnConnectionFailedListe
             btnGoogle.setVisibility(View.VISIBLE);
             btnFb.setVisibility(View.VISIBLE);
             btnTwt.setVisibility(View.VISIBLE);
-            user.returnDef();
+//            user.returnDef();
 //            ivAva.setImageResource(R.drawable.default_ava);
         }
-        update(); //cong
+        update(); //duc
     }
     public void update() {
         tvNick.setText(user.getName());
@@ -210,6 +221,7 @@ public class FragmentProfile extends Fragment implements OnConnectionFailedListe
         if (user.getAvatar() == 0) {
             HandleImage.get().downloadSaveImageFromUrl(user.getProfilePic());
             HandleImage.get().loadImageFromUrl(user.getProfilePic(), ivAva);
+//            Picasso.get().load(user.getPhotoUrl()).into(ivAva);
         }
         else  ivAva.setImageResource(user.getAvatar());
     }
@@ -241,12 +253,11 @@ public class FragmentProfile extends Fragment implements OnConnectionFailedListe
             });
         }
         try {
-            HandleFile.writeToFile();
-            HandleFile.readFeaturesJSONFile();
+            HandleFile.writeUserToFile();
+            HandleFile.readUserFile(GUEST);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        user.returnDef();
         updateDataUser();
     }
 }

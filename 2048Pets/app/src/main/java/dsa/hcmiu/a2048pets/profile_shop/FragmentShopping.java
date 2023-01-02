@@ -15,12 +15,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import dsa.hcmiu.a2048pets.MyApplication;
 import dsa.hcmiu.a2048pets.R;
 import dsa.hcmiu.a2048pets.entities.adapter.ShopAdapter;
+import dsa.hcmiu.a2048pets.entities.handle.HandleFile;
 import dsa.hcmiu.a2048pets.entities.handle.HandleGame;
+import dsa.hcmiu.a2048pets.entities.model.Features;
 import dsa.hcmiu.a2048pets.entities.model.ShopItem;
 
 import static dsa.hcmiu.a2048pets.entities.model.Features.shopItem;
@@ -45,6 +48,7 @@ public class FragmentShopping extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_store,container,false);
         init();
+        checkPurchased();
         selectItem = arrayShopItem.get(0);
         adapter = new ShopAdapter(getActivity(), R.layout.item_shop, arrayShopItem);
 
@@ -90,17 +94,18 @@ public class FragmentShopping extends Fragment {
                         user.hammer++;
                         break;
                     case 2: //ava
-                        if (selectItem.isPurchase()) {
+                        if (selectItem.isPurchase() || user.purchasedIdItem.contains(selectItem.getId())) {
                             user.setAvatar(selectItem.getPicture());
-                            break;
+                            return;
                         }
                         selectItem.setPurchased();
                         user.purchasedIdItem.add(selectItem.getId());
                         break;
                     case 3: //theme
-                        if (selectItem.isPurchase()) {
-                            HandleGame.getInstance().setTheme(selectItem.getId()%100);
-                            break;
+                        if (selectItem.isPurchase() || user.purchasedIdItem.contains(selectItem.getId())) {
+                            Features.theme = selectItem.getId()%100;
+                            HandleGame.getInstance().setTheme(Features.theme);
+                            return;
                         }
                         selectItem.setPurchased();
                         user.purchasedIdItem.add(selectItem.getId());
@@ -116,15 +121,16 @@ public class FragmentShopping extends Fragment {
                             selectItem.setPurchase(false);
                             user.unPurcahsedIdItem(selectItem.getId());
                             user.totalGold += selectItem.getPrice();
-                            break;
+                            return;
                         }
                         selectItem.setPurchase(true);
                         user.purchasedIdItem.add(selectItem.getId());
                         break;
                 }
                 showItem();
-                sendData.data(true);
+                sendData.dataProfile(true);
                 update();
+
             }
         });
 
@@ -150,6 +156,21 @@ public class FragmentShopping extends Fragment {
         addItem("Theme Classic", 300, R.raw.no2_1, 0);
         addItem("Theme Cat Items", 301, R.drawable.theme2, 2000);
     }
+    private void checkPurchased() {
+        for(ShopItem item: arrayShopItem) {
+//            for(int idPurchased: user.purchasedIdItem) {
+//                if (idPurchased != item.getId()) continue;
+//                Log.d("Shop", "update: itemid " + item.getId() + " idPurchased" + idPurchased);
+//                if (item.getId() == 400) item.setPurchase(true);
+//                else item.setPurchased();
+//            }
+            if (user.purchasedIdItem.contains(item.getId())) {
+                Log.d("Shop", "update: idPurchased" + item.getId());
+                item.setPurchased();
+            }
+            if (item.getId() == 400) item.setPurchase(true);
+        }
+    }
 
     public void showItem() {
         tvPrice.setText(String.valueOf(selectItem.getPrice()));
@@ -157,18 +178,20 @@ public class FragmentShopping extends Fragment {
         tvItemName.setText(String.valueOf(selectItem.getName()));
         if (selectItem.isPurchase()) btnPurchase.setImageResource(R.drawable.equip);
         else btnPurchase.setImageResource(R.drawable.purchase);
+    }
+
+    private void update() {
+        checkPurchased();
+        tvGold.setText(String.valueOf(user.totalGold));
+        try {
+            HandleFile.writeUserToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         adapter.notifyDataSetChanged();
     }
 
-    public void update() {
-        for(ShopItem item: arrayShopItem) {
-            for(int idPurchased: user.purchasedIdItem) {
-                if (idPurchased != item.getId()) continue;
-                Log.d("Shop", "update: itemid " + item.getId() + " idPurchased" + idPurchased);
-                if (item.getId() == 400) item.setPurchase(true);
-                else item.setPurchased();
-            }
-        }
+    public void onChangeData() {
         tvGold.setText(String.valueOf(user.totalGold));
     }
 

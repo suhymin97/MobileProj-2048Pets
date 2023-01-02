@@ -5,7 +5,6 @@
     <dimen name="d_fbicon">50dp</dimen>
     <dimen name="d_fbicon_margin">7dp</dimen>
     <dimen name="d_avaProfile">62dp</dimen>
-    <dimen name="d_ctnScore">50dp</dimen>
     <dimen name="d_txtScore">13sp</dimen>
     <dimen name="d_marginFBtnPlay">5dp</dimen>
     <dimen name="d_menuButton">100dp</dimen>
@@ -13,23 +12,18 @@
     <dimen name="d_achivement">30dp</dimen>
     <dimen name="d_itemshop">77dp</dimen>
     <dimen name="d_gold">20dp</dimen>
-    <dimen name="d_marginitemshop">5dp</dimen>
     <dimen name="d_cardview">83dp</dimen>
     <dimen name="d_menulayout_h">87dp</dimen>
     <dimen name="d_menulayout_mend">18dp</dimen>
 
     <dimen name="d_cupcat_w">245dp</dimen>
-    <dimen name="d_shadow_w">207dp</dimen>
     <dimen name="d_shadow_h">49dp</dimen>
     <dimen name="d_cupcat_margin">15dp</dimen>
-    <dimen name="d_cupcat_start">22dp</dimen>
-    <dimen name="d_cupcat_top">1dp</dimen>
 
     <dimen name="d_button_w">205dp</dimen>
     <dimen name="d_butplay_h">130dp</dimen>
 
     <dimen name="d_grid">373dp</dimen>
-    <dimen name="d_grid_mleft">130dp</dimen>
 
     <dimen name="d_hscore_m">17dp</dimen>
     <dimen name="d_hscore_h">67dp</dimen>
@@ -42,14 +36,12 @@
     <dimen name="d_profile_mtop">12dp</dimen>
     <dimen name="d_profile_ava_mtop">20dp</dimen>
     <dimen name="d_profile_txtUsername">13dp</dimen>
-    <dimen name="d_profile_txtlogin">7dp</dimen>
     <dimen name="d_btnlogin_h">35dp</dimen>
     <dimen name="d_btnlogin_w">13dp</dimen>
 
     <dimen name="d_store_padh">33dp</dimen>
     <dimen name="d_store_padv">39dp</dimen>
     <dimen name="d_store_btnpur_w">166dp</dimen>
-    <dimen name="d_store_btnpur_m">90dp</dimen>
     <dimen name="d_store_txtitem">20dp</dimen>
     <dimen name="d_store_txtprice">40dp</dimen>
 

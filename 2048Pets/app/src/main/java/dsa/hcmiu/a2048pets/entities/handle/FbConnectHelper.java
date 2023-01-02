@@ -45,6 +45,7 @@ public class FbConnectHelper {
      */
     public interface OnFbSignInListener {
         void OnFbSuccess(GraphResponse graphResponse);
+        void OnFbProfilePicture(GraphResponse graphResponse);
         void OnFbError(String errorMessage);
     }
 
@@ -78,7 +79,9 @@ public class FbConnectHelper {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         if (loginResult != null) {
+                            user.setAcessTokenFb(loginResult.getAccessToken().getToken());
                             callGraphAPI(loginResult.getAccessToken());
+//                            callGraphAPIProfileImage(loginResult.getAccessToken());
 							Log.i("Success", "Login Success");
                         }
                     }
@@ -114,8 +117,22 @@ public class FbConnectHelper {
                 });
         Bundle parameters = new Bundle();
         //Explicitly we need to specify the fields to get values else some values will be null.
-        parameters.putString("fields", "id,birthday,email,first_name,gender,last_name,link,location,name");
+        parameters.putString("fields", "id,birthday,email,first_name,gender,last_name,name,picture");
         request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+    private void callGraphAPIProfileImage(AccessToken accessToken) {
+        GraphRequest request = GraphRequest.newGraphPathRequest(
+                accessToken,
+                "/"+user.getIDFacebook()+"/picture",
+                new GraphRequest.Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse response) {
+                        fbSignInListener.OnFbProfilePicture(response);
+                    }
+                });
+
         request.executeAsync();
     }
 
@@ -143,7 +160,8 @@ public class FbConnectHelper {
             user.setEmail(jsonObject.getString("email"));
             user.setIDFacebook(jsonObject.getString("id"));
 //            user.setProfilePic(jsonObject.getJSONObject("picture").getJSONObject("data").getString("url"));
-            user.setProfilePic("http://graph.facebook.com/"+ user.getIDFacebook()+ "/picture?type=large");
+            user.setProfilePic(jsonObject.getJSONObject("picture").getJSONObject("data").getString("url"));
+            user.setPhotoUrl(Uri.parse(user.getProfilePic()));
             HandleImage.get().downloadSaveImageFromUrl(user.getProfilePic());
             Log.d("FbConnect","OnFbSuccess: "+ user.getIDFacebook());
             Log.d("FbConnect","OnFbSuccess: "+ user.getProfilePic());

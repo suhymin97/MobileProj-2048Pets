@@ -58,7 +58,7 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
 
     {
         try {
-            mSocket = IO.socket(Features.GAME_SERVER_IP);
+            mSocket = IO.socket(Features.GAME_SERVER_URL);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -165,7 +165,7 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
 //        mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect);
         mSocket.on(Socket.EVENT_CONNECT_ERROR, onConnectError);
 //        mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectError);
-//        mSocket.on(Socket.EVENT_CONNECT, onConnect);
+        mSocket.on(Socket.EVENT_CONNECT, onConnect);
         mSocket.on("player-number", playernumber);
         mSocket.connect();
 
@@ -220,6 +220,7 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
     protected void onPause() {
         super.onPause();
         HandleGame.getInstance().newGame();
+        mSocket.disconnect();
     }
 
     @Override
@@ -255,12 +256,19 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private Emitter.Listener onConnect = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            Log.i(TAG,mSocket.id()); // x8WIv7-mJelg7on_ALbx
+        }
+    };
+
     private Emitter.Listener playernumber = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
                     String playerNumber = (String) args[0];
                     if (playerNumber == "1") {
                         showMess(R.string.message_waiting);
@@ -270,8 +278,8 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
                     } else { // Immediately start the game if we're player two
                         setUpGame();
                     }
-                }
-            });
+//                }
+//            });
         }
     };
     private void showMess(int id) {
@@ -286,12 +294,12 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
     private Emitter.Listener startGame = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
                     setUpGame();
-                }
-            });
+//                }
+//            });
         }
     };
 
@@ -340,30 +348,30 @@ public class PlayPvpActivity extends Activity implements View.OnClickListener {
     private Emitter.Listener onDisconnect = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
                     Log.i(TAG, "diconnected");
                     isConnected = false;
                     Toast.makeText(getApplicationContext(),
                             R.string.disconnect, Toast.LENGTH_LONG).show();
-                }
-            });
+//                }
+//            });
         }
     };
 
     private Emitter.Listener onConnectError = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+//            runOnUiThread(new Runnable() {
+//                @Override
+//                public void run() {
                     Log.e(TAG, "Error connecting");
                     Log.e(TAG, args.toString());
-                    Toast.makeText(getApplicationContext(),
-                            R.string.error_connect, Toast.LENGTH_LONG).show();
-                }
-            });
+//                    Toast.makeText(getApplicationContext(),
+//                            R.string.error_connect, Toast.LENGTH_LONG).show();
+//                }
+//            });
         }
     };
 

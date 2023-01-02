@@ -71,39 +71,19 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/comic"
                 android:gravity="center"
-                android:paddingBottom="25dp"
                 android:text="score"
                 android:textColor="#000"
                 android:textSize="@dimen/d_txtScore" />
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvHighscore"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvNameHighscore"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:fontFamily="@font/comicbd"
-                    android:gravity="center"
-                    android:text="Highscore"
-                    android:layout_weight="1"
-                    android:textColor="#000"
-                    android:textSize="@dimen/d_txtScore" />
-
-                <TextView
-                    android:id="@+id/tvHighscore"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/comic"
-                    android:gravity="top|center_horizontal"
-                    android:text="Highscore"
-                    android:textColor="#000"
-                    android:textSize="@dimen/d_txtScore" />
-            </LinearLayout>
+                android:fontFamily="@font/comic"
+                android:gravity="center"
+                android:text="Highscore"
+                android:textColor="#000"
+                android:textSize="@dimen/d_txtScore" />
 
 
         </LinearLayout>

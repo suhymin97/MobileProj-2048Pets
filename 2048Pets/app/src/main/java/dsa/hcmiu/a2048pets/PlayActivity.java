@@ -16,9 +16,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import dsa.hcmiu.a2048pets.entities.adapter.ItemAdapter;
+import dsa.hcmiu.a2048pets.entities.handle.HandleFile;
 import dsa.hcmiu.a2048pets.entities.handle.HandleGame;
 import dsa.hcmiu.a2048pets.entities.handle.HandleImage;
 import dsa.hcmiu.a2048pets.entities.handle.OnSwipeTouchListener;
@@ -36,11 +38,11 @@ public class PlayActivity extends Activity implements View.OnClickListener {
     private ArrayList<Pets> matrixPet;
     private GridView gvMatrix;
     private ItemAdapter adapter;
-    private View layout;
-    private TextView tvScore, tvUndo, tvHammer, tvHighScore, tvNameHS;
+    private TextView tvScore, tvUndo, tvHammer, tvHighScore;
     private Button btnUndo, btnNew, btnSoundPlay;
     private Button btnHammer;
     private Button btnShop;
+    private Animation animFadeIn, animFadeOut;
 
     @Override
     public void onBackPressed() {
@@ -59,7 +61,14 @@ public class PlayActivity extends Activity implements View.OnClickListener {
         btnyes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                try {
+                    HandleFile.writeUserToFile();
+                    MyDialog.dismiss();
+                    finish();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
         btnno.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +90,6 @@ public class PlayActivity extends Activity implements View.OnClickListener {
         tvUndo = (TextView) findViewById(R.id.tvUndo);
         tvHammer = (TextView) findViewById(R.id.tvHammer);
         tvHighScore = (TextView) findViewById(R.id.tvHighscore);
-        tvNameHS = (TextView) findViewById(R.id.tvNameHighscore);
 
         btnUndo = (Button) findViewById(R.id.btnUndo);
         btnHammer = (Button) findViewById(R.id.btnHammer);
@@ -91,6 +99,9 @@ public class PlayActivity extends Activity implements View.OnClickListener {
 
         create();
         setData();
+
+        animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+        animFadeOut = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
 
         btnUndo.setOnClickListener(this) ;
         btnNew.setOnClickListener(this);
@@ -133,8 +144,10 @@ public class PlayActivity extends Activity implements View.OnClickListener {
     }
 
     private void check() {
+        gvMatrix.animate().setDuration(250).alpha(0);
         update();
         if (HandleGame.getInstance().gameOver()) {
+            gvMatrix.setClickable(false);
             final Dialog MyDialog = new Dialog(PlayActivity.this, R.style.FullHeightDialog);
             LayoutInflater inflater = PlayActivity.this.getLayoutInflater();
             MyDialog.setContentView(R.layout.dialog_gameover);
@@ -144,9 +157,15 @@ public class PlayActivity extends Activity implements View.OnClickListener {
             btnyes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    HandleGame.getInstance().newGame();
-                    update();
-                    MyDialog.cancel();
+                    try {
+                        HandleFile.writeUserToFile();
+                        HandleGame.getInstance().newGame();
+                        gvMatrix.setClickable(true);
+                        update();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    MyDialog.dismiss();
                 }
             });
             MyDialog.setCanceledOnTouchOutside(false);
@@ -156,19 +175,19 @@ public class PlayActivity extends Activity implements View.OnClickListener {
 
     private void update() {
         adapter.notifyDataSetChanged();
+        gvMatrix.animate().setDuration(250).alpha(1);
         tvScore.setText(String.valueOf(HandleGame.getInstance().curBoard.getScoreBoard()));
         tvUndo.setText(String.valueOf(user.undo));
         tvHammer.setText(String.valueOf(user.hammer));
         tvHighScore.setText(String.valueOf(user.highScore));
-        tvNameHS.setText(user.UserHighScore);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        HandleGame.getInstance().newGame();
-        update();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        HandleGame.getInstance().newGame();
+//        update();
+//    }
 
     @Override
     protected void onStart() {
@@ -177,11 +196,11 @@ public class PlayActivity extends Activity implements View.OnClickListener {
         update();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        HandleGame.getInstance().newGame();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        HandleGame.getInstance().newGame();
+//    }
 
     @Override
     public void onClick(View v) {
@@ -194,6 +213,11 @@ public class PlayActivity extends Activity implements View.OnClickListener {
             case R.id.btnNewGame:
                 Log.d("Play", "onClick: New");
                 HandleGame.getInstance().newGame();
+                try {
+                    HandleFile.writeUserToFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 update();
                 break;
             case R.id.btnSoundPlay:
